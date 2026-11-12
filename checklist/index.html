@@ -148,7 +148,7 @@ button{cursor:pointer;touch-action:manipulation}
 .card .field{margin-top:12px}
 textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
 
-.wa{display:flex;align-items:center;justify-content:center;gap:14px;min-height:84px;margin-top:24px;padding:10px 18px;border-radius:20px;background:var(--wa);color:#fff;text-decoration:none;box-shadow:0 6px 18px rgba(23,156,76,.32);transition:transform .08s}
+.wa{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;min-height:84px;margin-top:24px;padding:10px 18px;border:0;border-radius:20px;background:var(--wa);color:#fff;text-align:left;text-decoration:none;box-shadow:0 6px 18px rgba(23,156,76,.32);transition:transform .08s}
 .wa:active{transform:scale(.985)}
 .wa svg{flex:none;width:42px;height:42px}
 .wa b{display:block;font-size:27px;font-weight:900;line-height:1.15}
@@ -157,12 +157,8 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
 .hint .en{display:block;font-size:13px}
 .sent{margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#e2f3e8;color:#14532d;text-align:center;font-size:16px;font-weight:700}
 .sent .en{display:block;font-size:13px;font-weight:500;color:#3f6b50}
-.ghost{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:14px;border:2px solid var(--line);border-radius:16px;background:var(--card);font-size:18px;font-weight:700;line-height:1.2}
+.ghost{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:16px;border:2px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);text-decoration:none;font-size:17px;font-weight:700;line-height:1.2}
 .ghost small{font-size:13px;font-weight:500;color:var(--muted)}
-.preview{margin-top:12px}
-.preview summary{padding:10px 4px;font-size:16px;font-weight:700;color:var(--ink-2);cursor:pointer}
-.preview summary .en{margin-left:6px;font-size:13px;font-weight:500}
-.preview pre{margin:0;padding:14px;border-radius:14px;background:#fff;border:2px dashed var(--line);font:inherit;font-size:16px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
 
 .install{margin-top:22px;border-radius:var(--radius);background:#e3e6ea}
 .install summary{display:flex;align-items:center;gap:10px;padding:14px 16px;font-size:18px;font-weight:800;cursor:pointer;list-style:none}
@@ -260,18 +256,14 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
       <textarea id="noteInput" class="field" rows="3" maxlength="1000" placeholder="没有可以不填　Leave empty if nothing"></textarea>
     </section>
 
-    <a id="waBtn" class="wa" href="https://wa.me/">
+    <button id="waBtn" class="wa" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4a8.4 8.4 0 1 1 15.5-4.5z"/><path d="M8.5 11.8l2.3 2.3 4.7-4.7"/></svg>
-      <span><b>WhatsApp 发送</b><small>Send on WhatsApp</small></span>
-    </a>
-    <p class="hint">会打开 WhatsApp，请选工作群，再按发送<span class="en">WhatsApp opens — choose your work group, then press send</span></p>
+      <span><b>WhatsApp 发送 PDF</b><small>Send PDF on WhatsApp</small></span>
+    </button>
+    <p class="hint">选 WhatsApp → 选工作群 → 按发送<span class="en">Pick WhatsApp → your work group → send</span></p>
     <p class="sent" id="sentNote" hidden></p>
 
-    <button id="copyBtn" class="ghost" type="button">复制文字<small>Copy text</small></button>
-    <details class="preview">
-      <summary>看讯息内容<span class="en">Preview message</span></summary>
-      <pre id="previewText"></pre>
-    </details>
+    <a id="textBtn" class="ghost" href="https://wa.me/">只发文字（备用）<small>Send as a text message instead</small></a>
 
     <div class="install-slot"></div>
     <p class="foot">D LAP 每日工作表 · Daily Checklist</p>
@@ -414,10 +406,10 @@ var BRANCHES = [
   { code: 'GP', name: 'Gurney Paragon' }
 ];
 var ROLES = {
-  A: { zh: '收银', en: 'Cashier', color: '#1d5fc4' },
-  B: { zh: '开店店员', en: 'Opening Crew', color: '#1f8f47' },
-  C: { zh: '关店店员', en: 'Closing Crew', color: '#74c7ef' },
-  D: { zh: '维修', en: 'Maintenance', color: '#f28a1e' }
+  A: { zh: '收银', en: 'Cashier', color: '#1d5fc4', ink: '#ffffff', soft: '#e6eefc' },
+  B: { zh: '开店店员', en: 'Opening Crew', color: '#1f8f47', ink: '#ffffff', soft: '#e2f3e8' },
+  C: { zh: '关店店员', en: 'Closing Crew', color: '#74c7ef', ink: '#0b2f45', soft: '#e1f3fc' },
+  D: { zh: '维修', en: 'Maintenance', color: '#f28a1e', ink: '#2a1500', soft: '#fff0de' }
 };
 var ROLE_ORDER = ['A', 'B', 'C', 'D'];
 
@@ -557,13 +549,13 @@ function setTheme(color) {
 }
 function buzz() { try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {} }
 var toastTimer = null;
-function toast(zh, en) {
+function toast(zh, en, ms) {
   var t = $('toast');
   t.textContent = zh;
   if (en) t.appendChild(el('small', '', en));
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2800);
+  toastTimer = setTimeout(function () { t.classList.remove('show'); }, ms || 2800);
 }
 
 /* ================= 第一页 ================= */
@@ -778,31 +770,318 @@ function buildMessage() {
   if (note) lines.push('异常：' + note);
   return lines.join('\n');
 }
+var SENT_TEXT = {
+  pdf:  ['已分享 PDF', 'PDF shared — make sure it was sent in WhatsApp'],
+  file: ['PDF 已存到手机', 'PDF saved — send it in WhatsApp (📎 → Document)'],
+  text: ['已打开 WhatsApp（文字）', 'Opened WhatsApp (text) — make sure you pressed send']
+};
 function refreshMessage() {
-  var text = buildMessage();
-  $('waBtn').href = 'https://wa.me/?text=' + encodeURIComponent(text);
-  $('previewText').textContent = text;
+  $('textBtn').href = 'https://wa.me/?text=' + encodeURIComponent(buildMessage());
   var L = current(), sn = $('sentNote');
   if (L.sentAt) {
+    var t = SENT_TEXT[L.sentKind] || SENT_TEXT.text;
     sn.hidden = false;
-    sn.textContent = '✓ ' + fmtTime(L.sentAt) + ' 已打开 WhatsApp';
-    sn.appendChild(el('span', 'en', 'Opened WhatsApp at ' + fmtTime(L.sentAt) + ' — make sure you pressed send'));
+    sn.textContent = '✓ ' + fmtTime(L.sentAt) + ' ' + t[0];
+    sn.appendChild(el('span', 'en', fmtTime(L.sentAt) + ' · ' + t[1]));
   } else {
     sn.hidden = true;
   }
 }
-function copyText(text) {
-  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-  return new Promise(function (resolve, reject) {
-    var ta = document.createElement('textarea');
-    ta.value = text; ta.setAttribute('readonly', '');
-    ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    var ok = false;
-    try { ok = document.execCommand('copy'); } catch (e) {}
-    document.body.removeChild(ta);
-    ok ? resolve() : reject();
+function markSent(kind) {
+  var L = current();
+  L.sentAt = Date.now();
+  L.sentKind = kind;
+  persist();
+  refreshMessage();
+}
+
+/* ---------------- PDF 报告（在手机里直接做，不用上网） ---------------- */
+var PDF_W = 595.28, PDF_H = 841.89;   // A4（point）
+var PDF_S = 2.5;                       // 画质：约 180 dpi
+var PDF_FONT = '"PingFang SC","Hiragino Sans GB","Heiti SC","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","Droid Sans Fallback",sans-serif';
+var NO_LINE_START = /^[，、。：；！？）」』】,.:;!?)]/;
+
+function pf(size, weight) { return (weight || 400) + ' ' + size + 'px ' + PDF_FONT; }
+function wrapText(ctx, str, maxW) {
+  var tokens = String(str).match(/[\x21-\x7E]+[ \t]*|[ \t]+|\n|[\s\S]/gu) || [];
+  var lines = [], line = '';
+  var w = function (s) { return ctx.measureText(s.replace(/\s+$/, '')).width; };
+  var flush = function () { lines.push(line.replace(/\s+$/, '')); line = ''; };
+  tokens.forEach(function (t) {
+    if (t === '\n') { flush(); return; }
+    if (!line && /^\s+$/.test(t)) return;
+    if (w(line + t) <= maxW || NO_LINE_START.test(t)) { line += t; return; }
+    if (line) flush();
+    if (/^\s+$/.test(t)) return;
+    if (w(t) <= maxW) { line = t; return; }
+    Array.from(t).forEach(function (ch) {
+      if (line && w(line + ch) > maxW) flush();
+      line += ch;
+    });
   });
+  if (line.replace(/\s+$/, '') || !lines.length) flush();
+  return lines;
+}
+function fitFont(ctx, str, maxW, size, weight) {
+  ctx.font = pf(size, weight);
+  while (size > 7 && ctx.measureText(str).width > maxW) { size -= 0.5; ctx.font = pf(size, weight); }
+}
+
+function renderReportPages() {
+  var role = ROLES[profile.role];
+  var br = BRANCHES.filter(function (b) { return b.code === profile.branch; })[0];
+  var d = bizDate(), dow = d.getDay(), L = current(), s = stats(), now = Date.now();
+  var dateStr = fmtDate(d) + '（' + WEEK_ZH[dow] + '）';
+  var X0 = 34, X1 = PDF_W - 34, TW = X1 - X0, BOTTOM = PDF_H - 42;
+  var COL = { no: X0, task: X0 + 34, time: X1 - 150, status: X1 - 88 };
+  var pages = [], ctx = null, y = 0, inTable = false;
+
+  function txt(str, x, yy, size, weight, color, align) {
+    ctx.font = pf(size, weight); ctx.fillStyle = color; ctx.textAlign = align || 'left';
+    ctx.fillText(str, x, yy);
+  }
+  function box(x, yy, w, h, fill, stroke) {
+    if (fill) { ctx.fillStyle = fill; ctx.fillRect(x, yy, w, h); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 0.75; ctx.strokeRect(x, yy, w, h); }
+  }
+  function newPage() {
+    var cv = document.createElement('canvas');
+    cv.width = Math.round(PDF_W * PDF_S); cv.height = Math.round(PDF_H * PDF_S);
+    ctx = cv.getContext('2d');
+    ctx.scale(PDF_S, PDF_S);
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, PDF_W, PDF_H);
+    pages.push(cv);
+    if (pages.length === 1) drawTop(); else drawTopSmall();
+    if (inTable) drawTableHead();
+  }
+  function room(h) { if (y + h > BOTTOM) newPage(); }
+
+  function drawTop() {
+    box(0, 0, PDF_W, 78, role.color);
+    txt('D LAP 每日工作表', X0, 38, 22, 800, role.ink);
+    ctx.globalAlpha = 0.8;
+    txt('Daily Checklist', X0, 57, 11, 400, role.ink);
+    txt(role.en, X1, 57, 11, 400, role.ink, 'right');
+    ctx.globalAlpha = 1;
+    txt(profile.role + ' ' + role.zh, X1, 38, 20, 800, role.ink, 'right');
+    y = 92;
+    var cells = [
+      ['日期 Date', dateStr, 142],
+      ['分行 Outlet', br.code + ' ' + br.name, 160],
+      ['填写 Filled in by', profile.name, 125],
+      ['完成 Done', s.done + ' / ' + s.total, TW - 427]
+    ];
+    var x = X0;
+    cells.forEach(function (c) {
+      box(x, y, c[2], 48, '#f6f7f9', '#d8dce2');
+      txt(c[0], x + 10, y + 16, 9, 400, '#6b7380');
+      fitFont(ctx, c[1], c[2] - 20, 15, 700);
+      ctx.fillStyle = '#16181c'; ctx.textAlign = 'left';
+      ctx.fillText(c[1], x + 10, y + 38);
+      x += c[2];
+    });
+    y += 58;
+    if (profile.role === 'D') {
+      var k = (L.karts || '').trim() || '（没填）';
+      box(X0, y, TW, 34, '#f6f7f9', '#d8dce2');
+      txt('今天检查车号 Karts checked', X0 + 10, y + 21, 9, 400, '#6b7380');
+      fitFont(ctx, k, TW - 160, 13, 700);
+      ctx.fillStyle = (L.karts || '').trim() ? '#16181c' : '#c62020'; ctx.textAlign = 'left';
+      ctx.fillText(k, X0 + 150, y + 22);
+      y += 44;
+    }
+  }
+  function drawTopSmall() {
+    box(0, 0, PDF_W, 34, role.color);
+    txt('D LAP 每日工作表（续）', X0, 22, 12, 800, role.ink);
+    txt(profile.branch + ' · ' + profile.role + ' ' + role.zh + ' · ' + dateStr, X1, 22, 10, 600, role.ink, 'right');
+    y = 48;
+  }
+  function drawTableHead() {
+    box(X0, y, TW, 22, '#15171a');
+    txt('#', COL.no + 6, y + 15, 9, 700, '#fff');
+    txt('工作 Task', COL.task + 6, y + 15, 9, 700, '#fff');
+    txt('时间 Time', COL.time + 6, y + 15, 9, 700, '#fff');
+    txt('状态 Status', COL.status + 6, y + 15, 9, 700, '#fff');
+    y += 22;
+  }
+  function measureItem(it) {
+    var tw = COL.time - COL.task - 12;
+    ctx.font = pf(11, 600); var zl = wrapText(ctx, it.zh, tw);
+    ctx.font = pf(8, 400); var en = wrapText(ctx, it.en, tw);
+    ctx.font = pf(9, 400); var tl = it.time ? wrapText(ctx, it.time, COL.status - COL.time - 10) : [];
+    var h = Math.max(30, 21 + (zl.length - 1) * 14 + en.length * 10 + (en.length ? 3 : 0), 10 + tl.length * 12 + 6);
+    return { zl: zl, en: en, tl: tl, h: h };
+  }
+  function drawGroup(g, ids) {
+    var n = ids.filter(function (id) { return L.done[id]; }).length;
+    box(X0, y, TW, 20, role.soft);
+    txt(g.zh, X0 + 6, y + 14, 11, 800, '#16181c');
+    ctx.font = pf(11, 800);
+    txt(g.en, X0 + 14 + ctx.measureText(g.zh).width, y + 14, 8.5, 400, '#6b7380');
+    txt(n + '/' + ids.length, X1 - 6, y + 14, 10, 800, n === ids.length ? '#1b7a3e' : '#3d434b', 'right');
+    y += 20;
+  }
+  function drawItem(it, m) {
+    var ts = L.done[it.id], done = !!ts, base = y + 16;
+    if (!done) box(X0, y, TW, m.h, '#fdeeee');
+    txt('#' + it.n, COL.no + 6, base, 10, 700, '#3d434b');
+    m.zl.forEach(function (ln, i) { txt(ln, COL.task + 6, base + i * 14, 11, 600, '#16181c'); });
+    var ey = base + (m.zl.length - 1) * 14 + 12.5;
+    m.en.forEach(function (ln, i) { txt(ln, COL.task + 6, ey + i * 10, 8, 400, '#6b7380'); });
+    m.tl.forEach(function (ln, i) { txt(ln, COL.time + 6, base + i * 12, 9, 400, '#3d434b'); });
+    var cx = COL.status + 14, cy = y + 12.5;
+    ctx.beginPath(); ctx.arc(cx, cy, 7.5, 0, Math.PI * 2);
+    ctx.fillStyle = done ? '#1b8a45' : '#d02a2a'; ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    if (done) { ctx.moveTo(cx - 3.6, cy + 0.2); ctx.lineTo(cx - 1, cy + 2.8); ctx.lineTo(cx + 3.8, cy - 2.6); }
+    else { ctx.moveTo(cx - 3, cy - 3); ctx.lineTo(cx + 3, cy + 3); ctx.moveTo(cx + 3, cy - 3); ctx.lineTo(cx - 3, cy + 3); }
+    ctx.stroke();
+    if (done) {
+      txt('完成', cx + 12, base, 9.5, 700, '#1b7a3e');
+      if (typeof ts === 'number') { ctx.font = pf(9.5, 700); txt(fmtTime(ts), cx + 15 + ctx.measureText('完成').width, base, 8.5, 400, '#6b7380'); }
+    } else {
+      txt('未做', cx + 12, base, 10, 800, '#c62020');
+    }
+    ctx.strokeStyle = '#e3e6ea'; ctx.lineWidth = 0.75;
+    ctx.beginPath(); ctx.moveTo(X0, y + m.h); ctx.lineTo(X1, y + m.h); ctx.stroke();
+    y += m.h;
+  }
+  function noteBox(title, body, tone) {
+    var c = tone === 'bad' ? ['#fff5f5', '#f1b5b5', '#c62020'] : tone === 'good' ? ['#eef8f1', '#b6dfc3', '#1b7a3e'] : ['#f6f7f9', '#d8dce2', '#16181c'];
+    ctx.font = pf(11, 400);
+    var lines = body ? wrapText(ctx, body, TW - 24) : [];
+    var h = lines.length ? 34 + lines.length * 16 : 30;
+    room(h);
+    box(X0, y, TW, h, c[0], c[1]);
+    txt(title, X0 + 12, y + 20, 11, 800, c[2]);
+    lines.forEach(function (ln, i) { txt(ln, X0 + 12, y + 40 + i * 16, 11, 400, '#16181c'); });
+    y += h + 10;
+  }
+
+  newPage();
+  if (s.undone.length) {
+    noteBox('未做 Not done（' + s.undone.length + '）', s.undone.map(function (it) { return '#' + it.n + ' ' + it.short; }).join('、'), 'bad');
+  } else {
+    noteBox('全部完成 ✓ All done', '', 'good');
+  }
+  var note = (L.note || '').trim();
+  if (note) noteBox('今天的异常／需要跟进 Problems / follow-up', note, '');
+  else noteBox('今天的异常／需要跟进：没有　Problems / follow-up: none', '', '');
+  y += 4;
+  inTable = true;
+  drawTableHead();
+  GROUPS[profile.role].forEach(function (g) {
+    var items = g.items.filter(function (it) { return applies(it, profile.branch, dow); });
+    if (!items.length) return;
+    var ms = items.map(measureItem);
+    room(20 + ms[0].h);
+    drawGroup(g, items.map(function (it) { return it.id; }));
+    items.forEach(function (it, i) { room(ms[i].h); drawItem(it, ms[i]); });
+  });
+  inTable = false;
+
+  var made = fmtDate(new Date(now)) + ' ' + fmtTime(now);
+  pages.forEach(function (cv, i) {
+    ctx = cv.getContext('2d');
+    ctx.strokeStyle = '#d8dce2'; ctx.lineWidth = 0.75;
+    ctx.beginPath(); ctx.moveTo(X0, PDF_H - 30); ctx.lineTo(X1, PDF_H - 30); ctx.stroke();
+    txt('D LAP 每日工作表 · ' + profile.branch + ' · ' + profile.role + ' ' + role.zh + ' · ' + dateStr, X0, PDF_H - 17, 8, 400, '#8a919b');
+    txt('产生时间 ' + made + ' · 第 ' + (i + 1) + '/' + pages.length + ' 页', X1, PDF_H - 17, 8, 400, '#8a919b', 'right');
+  });
+  return pages;
+}
+
+function dataUrlBytes(url) {
+  var bin = atob(url.slice(url.indexOf(',') + 1)), out = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+function pdfText(str) {
+  var hex = 'FEFF';
+  for (var i = 0; i < str.length; i++) hex += ('000' + str.charCodeAt(i).toString(16)).slice(-4).toUpperCase();
+  return '<' + hex + '>';
+}
+/* 把每页 JPEG 放进一个 PDF 文件 */
+function buildPdf(images, title) {
+  var parts = [], pos = 0, offsets = [];
+  function add(x) {
+    if (typeof x === 'string') {
+      var a = new Uint8Array(x.length);
+      for (var i = 0; i < x.length; i++) a[i] = x.charCodeAt(i) & 255;
+      x = a;
+    }
+    parts.push(x); pos += x.length;
+  }
+  function obj(id, dict, stream) {
+    offsets[id] = pos;
+    add(id + ' 0 obj\n' + dict);
+    if (stream) { add('\nstream\n'); add(stream); add('\nendstream'); }
+    add('\nendobj\n');
+  }
+  var n = images.length, kids = [], W = PDF_W.toFixed(2), H = PDF_H.toFixed(2), t = new Date();
+  var stamp = t.getFullYear() + pad(t.getMonth() + 1) + pad(t.getDate()) + pad(t.getHours()) + pad(t.getMinutes()) + pad(t.getSeconds());
+  for (var i = 0; i < n; i++) kids.push((4 + i * 3) + ' 0 R');
+  add('%PDF-1.4\n'); add(new Uint8Array([0x25, 0xE2, 0xE3, 0xCF, 0xD3, 0x0A]));
+  obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  obj(2, '<< /Type /Pages /Kids [' + kids.join(' ') + '] /Count ' + n + ' >>');
+  obj(3, '<< /Title ' + pdfText(title) + ' /Producer (D LAP Daily Checklist) /CreationDate (D:' + stamp + ') >>');
+  images.forEach(function (img, i) {
+    var p = 4 + i * 3, content = 'q ' + W + ' 0 0 ' + H + ' 0 0 cm /Im0 Do Q';
+    obj(p, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + W + ' ' + H + '] /Resources << /XObject << /Im0 ' + (p + 2) + ' 0 R >> >> /Contents ' + (p + 1) + ' 0 R >>');
+    obj(p + 1, '<< /Length ' + content.length + ' >>', content);
+    obj(p + 2, '<< /Type /XObject /Subtype /Image /Width ' + img.w + ' /Height ' + img.h +
+      ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + img.bytes.length + ' >>', img.bytes);
+  });
+  var size = 4 + n * 3, xrefAt = pos, xref = 'xref\n0 ' + size + '\n0000000000 65535 f \n';
+  for (var j = 1; j < size; j++) xref += ('000000000' + offsets[j]).slice(-10) + ' 00000 n \n';
+  add(xref);
+  add('trailer\n<< /Size ' + size + ' /Root 1 0 R /Info 3 0 R >>\nstartxref\n' + xrefAt + '\n%%EOF\n');
+  return new Blob(parts, { type: 'application/pdf' });
+}
+/* 文件名只用英文字母和数字（有些手机不接受华文文件名）；华文名字已经印在 PDF 里 */
+function reportFileName() {
+  var d = bizDate();
+  var nm = profile.name.replace(/[^A-Za-z0-9 ._-]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 30);
+  return ['DLAP', profile.branch, profile.role,
+    pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear(), nm].filter(Boolean).join(' ') + '.pdf';
+}
+function makePdfFile() {
+  var pages = renderReportPages();
+  var images = pages.map(function (cv) {
+    var img = { w: cv.width, h: cv.height, bytes: dataUrlBytes(cv.toDataURL('image/jpeg', 0.85)) };
+    cv.width = cv.height = 0;   // 释放手机记忆体
+    return img;
+  });
+  var d = bizDate();
+  var blob = buildPdf(images, 'D LAP 每日工作 ' + fmtDate(d) + ' ' + profile.branch + ' ' +
+    profile.role + ' ' + ROLES[profile.role].zh + ' ' + profile.name);
+  return new File([blob], reportFileName(), { type: 'application/pdf' });
+}
+function saveFile(file) {
+  var url = URL.createObjectURL(file), a = document.createElement('a');
+  a.href = url; a.download = file.name;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+  markSent('file');
+  toast('PDF 已存到手机。到 WhatsApp 工作群按 📎 → 文件，选它发送', 'PDF saved. In WhatsApp tap 📎 → Document to send it', 6000);
+}
+/* 一定要在按钮的 click 里马上做完（iPhone 才肯打开分享选单） */
+function sharePdf() {
+  if (checkNewDay()) return;
+  var file;
+  try { file = makePdfFile(); }
+  catch (err) { toast('做 PDF 失败，请用「只发文字」', 'Could not make the PDF — send as text instead', 5000); return; }
+  var data = { files: [file] };
+  if (navigator.share && navigator.canShare && navigator.canShare(data)) {
+    navigator.share(data).then(function () { markSent('pdf'); }, function (err) {
+      if (err && err.name === 'AbortError') return;   // 自己按了取消
+      saveFile(file);
+    });
+  } else {
+    saveFile(file);
+  }
 }
 
 function bindWork() {
@@ -817,20 +1096,11 @@ function bindWork() {
     current().karts = this.value; persist(); refreshMessage();
   });
   $('kartInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); this.blur(); } });
-  $('waBtn').addEventListener('click', function (e) {
+  $('waBtn').addEventListener('click', sharePdf);
+  $('textBtn').addEventListener('click', function (e) {
     if (checkNewDay()) { e.preventDefault(); return; }
     refreshMessage();
-    current().sentAt = Date.now();
-    persist();
-    refreshMessage();
-  });
-  $('copyBtn').addEventListener('click', function () {
-    copyText(buildMessage()).then(function () {
-      toast('已复制，可以去 WhatsApp 贴上', 'Copied — paste it in WhatsApp');
-    }, function () {
-      document.querySelector('.preview').open = true;
-      toast('复制不到，请看下面的讯息内容', 'Could not copy — see preview below');
-    });
+    markSent('text');
   });
   $('changeBtn').addEventListener('click', function () {
     history.pushState({ s: 'setup' }, '');

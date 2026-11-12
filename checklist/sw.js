@@ -1,5 +1,5 @@
 /* D LAP 每日工作表 — 离线也能打开（有网络时一定拿最新版） */
-var CACHE = 'dlap-checklist-v1';
+var CACHE = 'dlap-checklist-v2';
 var SHELL = [
   './',
   './manifest.webmanifest',
