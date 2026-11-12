@@ -42,7 +42,7 @@
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{
   margin:0;background:var(--bg);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","Noto Sans Bengali","Kohinoor Bangla","Bangla Sangam MN","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   font-size:18px;line-height:1.4;min-height:100vh;
   -webkit-font-smoothing:antialiased;
 }
@@ -53,15 +53,24 @@ button{cursor:pointer;touch-action:manipulation}
 .en{color:var(--muted)}
 .check{width:22px;height:22px;display:block}
 
+/* ---------- 语言 ---------- */
+.lang-row{display:flex;gap:8px}
+.lang-btn{flex:1;min-height:52px;padding:6px 8px;border:2px solid var(--line);border-radius:14px;background:var(--card);font-size:18px;font-weight:800}
+.lang-btn[aria-pressed="true"]{background:var(--dark);border-color:var(--dark);color:#fff}
+#setup .lang-row{margin-top:18px}
+.lang-box{margin-top:26px}
+.lang-label{margin:0 2px 8px;font-size:16px;font-weight:700;color:var(--ink-2)}
+.lang-label .en{margin-left:6px;font-size:13px;font-weight:500}
+
 /* ---------- 第一页 ---------- */
 .brandbar{background:var(--dark);color:#fff;padding:calc(20px + var(--safe-t)) 0 22px}
 .brand{display:flex;align-items:center;gap:14px}
 .logo{flex:none;font-weight:900;font-size:22px;letter-spacing:-.01em;line-height:1;background:#fff;color:var(--dark);padding:10px 12px;border-radius:12px;font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif}
-.brand-zh{font-size:28px;font-weight:800;line-height:1.15}
-.brand-en{font-size:15px;color:rgba(255,255,255,.62)}
+.brand-t{font-size:28px;font-weight:800;line-height:1.15}
+.brand-t .en{display:block;font-size:15px;font-weight:400;color:rgba(255,255,255,.62)}
 .step{margin:26px 0}
-.step-h{display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;margin:0 0 12px;font-size:23px;font-weight:800;line-height:1.2}
-.step-h .en{font-size:15px;font-weight:500}
+.step-h{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:23px;font-weight:800;line-height:1.25}
+.step-h .en{margin-left:8px;font-size:15px;font-weight:500}
 .step-n{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--dark);color:#fff;font-size:18px}
 .step.flash .step-h{animation:flash 1.1s ease}
 @keyframes flash{0%,100%{color:inherit}20%,60%{color:#d22}}
@@ -77,12 +86,11 @@ button{cursor:pointer;touch-action:manipulation}
 .opt-branch[aria-pressed="true"] .ok{background:#fff;border-color:#fff;color:var(--dark)}
 
 .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.opt-role{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:124px;padding:14px 16px;border:0;border-radius:18px;background:var(--c);color:var(--c-ink);text-align:left;transition:opacity .15s,box-shadow .15s}
+.opt-role{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:124px;padding:14px 16px;border:0;border-radius:18px;background:var(--c);color:var(--c-ink);text-align:left;transition:box-shadow .15s}
 .opt-role .letter{font-size:36px;font-weight:900;line-height:1;font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif}
-.opt-role .zh{font-size:24px;font-weight:800;margin-top:8px;line-height:1.2}
+.opt-role .zh{font-size:23px;font-weight:800;margin-top:8px;line-height:1.2}
 .opt-role .sub{font-size:15px;color:var(--c-sub)}
 .opt-role .ok{position:absolute;top:12px;right:12px;border-color:currentColor;opacity:.55}
-.role-grid.has-pick .opt-role[aria-pressed="false"]{opacity:.42}
 .opt-role[aria-pressed="true"]{box-shadow:0 0 0 4px var(--bg),0 0 0 8px var(--dark)}
 .opt-role[aria-pressed="true"] .ok{opacity:1;background:var(--c-ink);border-color:var(--c-ink);color:var(--c)}
 
@@ -100,17 +108,19 @@ button{cursor:pointer;touch-action:manipulation}
 .bar{position:sticky;top:0;z-index:5;background:var(--c);color:var(--c-ink);padding:calc(10px + var(--safe-t)) 0 12px;box-shadow:0 2px 12px rgba(0,0,0,.14)}
 .bar-row{display:flex;align-items:center;gap:12px}
 .badge{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--c-ink);color:var(--c);font-size:28px;font-weight:900;font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif}
+.badge.multi{grid-template-columns:1fr 1fr;gap:3px;place-items:stretch;background:none}
+.badge.multi span{display:grid;place-items:center;border-radius:7px;background:var(--c);color:var(--c-ink);font-size:15px;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
 .who{flex:1;min-width:0}
-.who-zh{font-size:22px;font-weight:800;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who-zh{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:22px;font-weight:800;line-height:1.2}
 .who-en{font-size:14px;color:var(--c-sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .change{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:66px;min-height:50px;padding:4px 12px;border:2px solid currentColor;border-radius:12px;background:transparent;color:var(--c-ink);font-size:18px;font-weight:800;line-height:1.1}
-.change small{font-size:11px;font-weight:600;opacity:.8}
+.change .en{font-size:11px;font-weight:600;color:inherit;opacity:.8}
 .bar-row2{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:10px}
 .date{font-size:20px;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
 .date-sub{font-size:14px;color:var(--c-sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:52vw}
 .count{display:flex;align-items:baseline;gap:6px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
 .count-l{display:flex;flex-direction:column;align-items:flex-end;font-size:15px;font-weight:700;align-self:center;line-height:1.15}
-.count-l small{font-size:11px;font-weight:600;color:var(--c-sub)}
+.count-l .en{font-size:11px;font-weight:600;color:var(--c-sub)}
 .count b{font-size:34px;font-weight:900}
 .count .count-t{font-size:22px;font-weight:800;opacity:.8}
 .meter{height:10px;margin-top:9px;border-radius:99px;background:rgba(0,0,0,.2);overflow:hidden}
@@ -118,25 +128,29 @@ button{cursor:pointer;touch-action:manipulation}
 
 .tap-hint{margin:14px 0 0;text-align:center;font-size:15px;color:var(--ink-2)}
 .tap-hint .en{display:block;font-size:13px}
+.role-h{display:flex;align-items:center;gap:12px;margin:26px 0 0;padding:12px 14px;border-radius:16px;background:var(--c);color:var(--c-ink)}
+.role-h .rl{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:var(--c-ink);color:var(--c);font-size:24px;font-weight:900;font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif}
+.role-h .rn{flex:1;min-width:0;font-size:21px;font-weight:800;line-height:1.2}
+.role-h .rn .en{display:block;font-size:13px;font-weight:500;color:var(--c-sub)}
+.role-h .rc{flex:none;font-size:18px;font-weight:900;font-variant-numeric:tabular-nums}
 .group{margin-top:22px}
 .group-h{display:flex;align-items:center;gap:10px;margin:0 2px 10px}
-.group-t{flex:1;min-width:0;line-height:1.2}
-.group-zh{display:block;font-size:21px;font-weight:800}
-.group-en{display:block;font-size:14px;color:var(--muted)}
+.group-t{flex:1;min-width:0;font-size:21px;font-weight:800;line-height:1.2}
+.group-t .en{display:block;font-size:14px;font-weight:500}
 .group-count{flex:none;padding:3px 11px;border-radius:99px;background:#dfe2e7;color:var(--ink-2);font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
 .group.done .group-count{background:var(--c-deep);color:#fff}
 .tiles{display:grid;gap:10px}
 .tile{display:flex;align-items:flex-start;gap:14px;width:100%;min-height:82px;padding:14px 16px;border:2px solid var(--line);border-radius:var(--radius);background:var(--card);text-align:left;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:background-color .15s,border-color .15s,transform .08s}
 .tile:active{transform:scale(.985)}
-.tile:focus-visible,.opt-branch:focus-visible,.opt-role:focus-visible,.start:focus-visible,.wa:focus-visible{outline:3px solid #2b6cff;outline-offset:2px}
+.tile:focus-visible,.opt-branch:focus-visible,.opt-role:focus-visible,.start:focus-visible,.wa:focus-visible,.lang-btn:focus-visible{outline:3px solid #2b6cff;outline-offset:2px}
 .tick{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:3px solid #b6bcc5;background:#fff;color:#fff;transition:background-color .15s,border-color .15s}
 .tick .check{opacity:0;transform:scale(.5);transition:opacity .15s,transform .15s}
 .tile[aria-pressed="true"]{background:var(--c-soft);border-color:var(--c-deep)}
 .tile[aria-pressed="true"] .tick{background:var(--c-deep);border-color:var(--c-deep)}
 .tile[aria-pressed="true"] .tick .check{opacity:1;transform:none}
 .t-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.t-zh{font-size:20px;font-weight:600;line-height:1.38;color:var(--ink)}
-.t-en{font-size:15px;line-height:1.35;color:var(--muted)}
+.t-main{font-size:20px;font-weight:600;line-height:1.38;color:var(--ink)}
+.t-sub{font-size:15px;line-height:1.35;color:var(--muted)}
 .t-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{padding:2px 9px;border-radius:99px;background:#eceef1;color:var(--ink-2);font-size:13px;font-weight:700;line-height:1.5}
 .chip .en{font-weight:500}
@@ -151,14 +165,14 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
 .wa{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;min-height:84px;margin-top:24px;padding:10px 18px;border:0;border-radius:20px;background:var(--wa);color:#fff;text-align:left;text-decoration:none;box-shadow:0 6px 18px rgba(23,156,76,.32);transition:transform .08s}
 .wa:active{transform:scale(.985)}
 .wa svg{flex:none;width:42px;height:42px}
-.wa b{display:block;font-size:27px;font-weight:900;line-height:1.15}
-.wa small{display:block;font-size:15px;opacity:.88}
+.wa-t{display:block;font-size:26px;font-weight:900;line-height:1.15}
+.wa-t .en{display:block;font-size:15px;font-weight:400;color:#fff;opacity:.88}
 .hint{margin:10px 0 0;text-align:center;font-size:16px;color:var(--ink-2)}
 .hint .en{display:block;font-size:13px}
 .sent{margin:12px 0 0;padding:10px 14px;border-radius:14px;background:#e2f3e8;color:#14532d;text-align:center;font-size:16px;font-weight:700}
 .sent .en{display:block;font-size:13px;font-weight:500;color:#3f6b50}
-.ghost{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:16px;border:2px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);text-decoration:none;font-size:17px;font-weight:700;line-height:1.2}
-.ghost small{font-size:13px;font-weight:500;color:var(--muted)}
+.ghost{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:58px;margin-top:16px;border:2px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink);text-decoration:none;font-size:17px;font-weight:700;line-height:1.2;text-align:center}
+.ghost .en{font-size:13px;font-weight:500}
 
 .install{margin-top:22px;border-radius:var(--radius);background:#e3e6ea}
 .install summary{display:flex;align-items:center;gap:10px;padding:14px 16px;font-size:18px;font-weight:800;cursor:pointer;list-style:none}
@@ -185,34 +199,32 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
 </head>
 <body>
 
-<!-- ================= 第一页：选分行、岗位、名字 ================= -->
+<!-- ================= 第一页：语言、分行、岗位、名字 ================= -->
 <div id="setup" hidden>
   <header class="brandbar">
     <div class="wrap brand">
       <div class="logo">D LAP</div>
-      <div>
-        <div class="brand-zh">每日工作表</div>
-        <div class="brand-en">Daily Checklist</div>
-      </div>
+      <div class="brand-t" data-t="appTitle"></div>
     </div>
   </header>
   <main class="wrap">
+    <div class="lang-row" role="group" aria-label="Language"></div>
     <section class="step" id="stepBranch">
-      <h2 class="step-h"><span class="step-n">1</span>选分行<span class="en">Choose outlet</span></h2>
+      <h2 class="step-h"><span class="step-n">1</span><span data-t="chooseOutlet"></span></h2>
       <div class="branch-list" id="branchList"></div>
     </section>
     <section class="step" id="stepRole">
-      <h2 class="step-h"><span class="step-n">2</span>选岗位<span class="en">Choose your job</span></h2>
+      <h2 class="step-h"><span class="step-n">2</span><span data-t="chooseRole"></span></h2>
       <div class="role-grid" id="roleGrid"></div>
     </section>
     <section class="step" id="stepName">
-      <h2 class="step-h"><span class="step-n">3</span>你的名字<span class="en">Your name</span></h2>
-      <input id="nameInput" class="field" type="text" maxlength="30" autocomplete="name" enterkeyhint="done" placeholder="例如：阿明　e.g. Ah Ming">
+      <h2 class="step-h"><span class="step-n">3</span><span data-t="yourName"></span></h2>
+      <input id="nameInput" class="field" type="text" maxlength="30" autocomplete="name" enterkeyhint="done" data-ph="namePh">
     </section>
-    <button id="startBtn" class="start" type="button">开始<span class="en">Start</span></button>
+    <button id="startBtn" class="start" type="button" data-t="start"></button>
     <p id="missing" class="missing" aria-live="polite"></p>
     <div class="install-slot" data-open="1"></div>
-    <p class="foot">D LAP 每日工作表 · Daily Checklist</p>
+    <p class="foot">D LAP · Daily Checklist</p>
   </main>
 </div>
 
@@ -223,18 +235,18 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
       <div class="bar-row">
         <div class="badge" id="badge"></div>
         <div class="who">
-          <div class="who-zh" id="whoZh"></div>
-          <div class="who-en" id="whoEn"></div>
+          <div class="who-zh" id="whoMain"></div>
+          <div class="who-en" id="whoSub"></div>
         </div>
-        <button class="change" id="changeBtn" type="button">更换<small>Change</small></button>
+        <button class="change" id="changeBtn" type="button" data-t="change"></button>
       </div>
       <div class="bar-row2">
         <div>
-          <div class="date" id="dateZh"></div>
+          <div class="date" id="dateMain"></div>
           <div class="date-sub" id="dateSub"></div>
         </div>
         <div class="count">
-          <span class="count-l" id="countL">完成<small>Done</small></span>
+          <span class="count-l" id="countL"></span>
           <b id="doneN">0</b><span class="count-t">/<span id="totalN">0</span></span>
         </div>
       </div>
@@ -243,30 +255,34 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
   </header>
 
   <main class="wrap">
-    <p class="tap-hint">按一下打勾，再按一下取消<span class="en">Tap to tick · tap again to untick</span></p>
+    <p class="tap-hint" data-t="tapHint"></p>
     <div id="list"></div>
 
     <section class="card" id="kartCard">
-      <label class="card-h" for="kartInput">今天检查车号<span class="en">Kart numbers checked today</span></label>
-      <input id="kartInput" class="field" type="text" maxlength="100" enterkeyhint="done" placeholder="例如 1-12　e.g. 1-12">
+      <label class="card-h" for="kartInput" data-t="karts"></label>
+      <input id="kartInput" class="field" type="text" maxlength="100" enterkeyhint="done" data-ph="kartsPh">
     </section>
 
     <section class="card">
-      <label class="card-h" for="noteInput">今天的异常／需要跟进<span class="en">Problems / follow-up today (can leave empty)</span></label>
-      <textarea id="noteInput" class="field" rows="3" maxlength="1000" placeholder="没有可以不填　Leave empty if nothing"></textarea>
+      <label class="card-h" for="noteInput" data-t="note"></label>
+      <textarea id="noteInput" class="field" rows="3" maxlength="1000" data-ph="notePh"></textarea>
     </section>
 
     <button id="waBtn" class="wa" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.5-4.4a8.4 8.4 0 1 1 15.5-4.5z"/><path d="M8.5 11.8l2.3 2.3 4.7-4.7"/></svg>
-      <span><b>WhatsApp 发送 PDF</b><small>Send PDF on WhatsApp</small></span>
+      <span class="wa-t" data-t="sendPdf"></span>
     </button>
-    <p class="hint">选 WhatsApp → 选工作群 → 按发送<span class="en">Pick WhatsApp → your work group → send</span></p>
+    <p class="hint" data-t="sendHint"></p>
     <p class="sent" id="sentNote" hidden></p>
 
-    <a id="textBtn" class="ghost" href="https://wa.me/">只发文字（备用）<small>Send as a text message instead</small></a>
+    <a id="textBtn" class="ghost" href="https://wa.me/" data-t="textOnly"></a>
 
+    <div class="lang-box">
+      <div class="lang-label" data-t="language"></div>
+      <div class="lang-row" role="group" aria-label="Language"></div>
+    </div>
     <div class="install-slot"></div>
-    <p class="foot">D LAP 每日工作表 · Daily Checklist</p>
+    <p class="foot">D LAP · Daily Checklist</p>
   </main>
 </div>
 
@@ -281,10 +297,11 @@ textarea.field{min-height:116px;resize:vertical;font-size:19px;line-height:1.45}
    ---------------------------------------------------------------------
    格式：  编号 | 华文 | English | 时间 | 简称（可不写）
    分类：  ## 分类华文 | English
-   · 「简称」是 WhatsApp「未做：」里显示的短名字。不写的话，
+   · 「简称」是报告「未做：」里显示的短名字。不写的话，
      自动用华文「：」或「，」前面的字。
    · 华文里有（一、三、六）→ 只在星期一、三、六出现
    · 华文里有（SF & SP）、（SF/Paragon）→ 只给那些分行
+   · 改了这里，下面的孟加拉文翻译（BN）也要跟着改
    ===================================================================== */
 var TASKS = {
 A: `
@@ -398,6 +415,114 @@ D: `
 `
 };
 
+/* =====================================================================
+   孟加拉文翻译（বাংলা）—— 格式：编号 | 孟加拉文
+   请孟加拉同事检查；没翻译的项目会显示英文
+   ===================================================================== */
+var BN = {
+A: `
+1 | দোকান খোলার সময় ক্যাশের টাকা ঠিক আছে কিনা মিলিয়ে দেখুন
+2 | Display TV চালু আছে কিনা দেখুন
+3 | ক্যাশ সিস্টেম: POS ঠিকমতো চালু, রসিদের কাগজ যথেষ্ট আছে
+4 | কার্ডে পেমেন্ট: কার্ড মেশিন ও TNG মেশিনের সংযোগ ঠিক আছে
+5 | বোর্ড গেম মেশিনের চার্জ দেখুন, কম থাকলে চার্জ দিন (SF ও Paragon)
+6 | টিকিট, হাতের ব্যান্ড ও রসিদের রোল যথেষ্ট আছে
+7 | কোম্পানির ওয়েবসাইটে আজকের ট্রেনিং / বুকিং দেখুন
+8 | গ্রাহক কোথা থেকে আমাদের দোকানের কথা জেনেছে, লিখে রাখুন
+9 | WhatsApp গ্রুপে কতজন যোগ দিয়েছে লিখুন (সংখ্যা আলাদা ফর্মে লিখুন)
+10 | বুকিং, জন্মদিনের পার্টি ও দলবদ্ধ অতিথি লিখে রাখুন
+11 | গ্রাহকের অভিযোগ ও হারানো জিনিস লিখে রাখুন
+12 | বড় নোট নিয়মিত সেফে রাখুন
+13 | হিসাব বন্ধের সময় পরের দিনের জন্য যথেষ্ট খুচরা টাকা রাখুন
+14 | নগদ টাকা গুনে POS দৈনিক রিপোর্টের সাথে মেলান — পার্থক্য থাকলে লিখে রাখুন
+15 | কার্ড মেশিনের settlement মেলান (যে আউটলেটে কার্ড মেশিন আছে সেখানে অবশ্যই)
+`,
+B: `
+1 | ট্র্যাক ঝাড়ু: মাটিতে বালি, পাতা, জমা পানি বা তেল নেই
+2 | টায়ারের দেয়াল / ব্যারিয়ার: সাজানো, কোনো ধারালো জিনিস নেই
+3 | ড্রেন: ঢাকনা ঠিক আছে, কিছু আটকে নেই
+4 | ট্র্যাক মোছা (সোম, বুধ, শনি): খোলার বা বন্ধের সময় একবার
+5 | মেঝে ঝাড়ু ও মোছা হয়েছে, তেল বা পানির দাগ নেই
+6 | কার্টগুলো সারি করে রাখা, সবগুলোর সামনের দিক একই দিকে
+7 | ডাস্টবিন খালি করে নতুন ব্যাগ লাগানো হয়েছে
+8 | টেবিল ও চেয়ার মোছা: ধুলা বা পানির দাগ নেই
+9 | রিসেপশনের মেঝে ঝাড়ু ও মোছা হয়েছে
+10 | দোকানের সামনের মেঝে মোছা (সোম, বুধ, শনি): খোলার বা বন্ধের সময় একবার
+11 | কাউন্টার, কাচের দরজা-জানালা ও Banner মোছা: হাতের ছাপ নেই
+12 | VR Machine ও টিভি মুছুন
+13 | Electric Mini Track মুছুন (SF ও SP)
+14 | চেয়ারে ছেঁড়া আছে কিনা আর শক্ত করে লাগানো কিনা দেখুন
+15 | হেলমেট মোছা: ভিতরে-বাইরে জীবাণুমুক্ত, কোনো গন্ধ নেই
+16 | একবার ব্যবহারের মাথার ক্যাপ সাজিয়ে রাখা, সহজে নেওয়া যায়
+17 | হেলমেট র‍্যাক / আলমারি পরিষ্কার ও গোছানো
+18 | সুরক্ষা সরঞ্জাম গোনা হয়েছে, জীবাণুনাশক স্প্রে ভরা হয়েছে
+19 | টুল কিট: রেঞ্চ, স্ক্রু-ড্রাইভার, জিপ টাই, অতিরিক্ত স্ক্রু সব আছে
+20 | ব্যাটারি কতটা ব্যবহার হয়েছে দেখুন
+21 | ফার্স্ট এইড বক্স: প্লাস্টার, জীবাণুনাশক ইত্যাদি ভরা আছে
+22 | অগ্নি নির্বাপক: চাপের কাঁটা সবুজ ঘরে, সহজে চোখে পড়ে ও হাতের কাছে
+23 | টর্চ: ঠিকমতো জ্বলে, চার্জ পূর্ণ
+24 | CCTV চালু, ছবি পরিষ্কার
+25 | জরুরি স্টপ বোতাম পরীক্ষা করা হয়েছে, ঠিক আছে
+26 | জরুরি বের হওয়ার পথ খোলা, কিছু আটকে নেই
+27 | আলো: ট্র্যাক, বসার জায়গা ও সাইনবোর্ডের সব বাতি জ্বলছে
+28 | গান / মাইক চালু, আওয়াজ ঠিক আছে
+29 | কর্মীদের পোশাক: ইউনিফর্ম + ফুল প্যান্ট + স্পোর্টস জুতা
+30 | শিফটের সব কর্মী হাজির
+31 | খোলার সময় কার্টের ব্যাটারির চার্জ লিখুন (সংখ্যা আলাদা ফর্মে লিখুন)
+32 | শেষবার পুরো জায়গা ঘুরে দেখুন, সব কিছু প্রস্তুত
+`,
+C: `
+1 | প্রতি ঘণ্টায় একবার ঘুরে দেখুন: ট্র্যাক ও লাউঞ্জ নিরাপদ
+2 | ঝাড়ু দিন (ভিতরে)
+3 | ঝাড়ু দিন (বাইরে), ময়লা জড়ো করে বাইরে ফেলে দিন
+4 | দোকানের সামনের মেঝে মোছা (সোম, বুধ, শনি): খোলার বা বন্ধের সময় একবার
+5 | ট্র্যাক মোছা (সোম, বুধ, শনি): খোলার বা বন্ধের সময় একবার
+6 | হেলমেট ও সুরক্ষা সরঞ্জাম জীবাণুমুক্ত করে জায়গামতো রাখুন
+7 | কার্টগুলো জায়গামতো সারি করে রাখুন
+8 | টেবিল, চেয়ার ও কাউন্টার মুছে পরিষ্কার করুন
+9 | পুরো জায়গায় গ্রাহকের কোনো জিনিস ফেলে গেছে কিনা দেখুন
+10 | কিছু পেলে: ছবি তুলে কাজের গ্রুপে জানান, তারপর নিরাপদে রেখে দিন
+11 | POS, TNG ও কার্ড মেশিন বন্ধ (আগে settlement শেষ করুন)
+12 | টিভি / Display TV, VR Machine ও গান বন্ধ
+13 | ট্র্যাকের বাতি, সাইনবোর্ড, এসি ও ফ্যান বন্ধ
+14 | বন্ধের সময় কার্টের ব্যাটারির চার্জ লিখুন (সংখ্যা আলাদা ফর্মে লিখুন)
+15 | দরকার হলে বন্ধের আগে কার্টের ব্যাটারি চার্জে দিন
+16 | ভিতরে কেউ নেই নিশ্চিত করুন (বিশেষ করে শিশু)
+17 | CCTV চালু আছে, দরজা-জানালায় তালা, অ্যালার্ম চালু
+`,
+D: `
+1 | ফ্রেম পরীক্ষা: কোনো ফাটল নেই, বাম্পার বেশি বাঁকা নয়, স্ক্রু-বোল্ট ঢিলা নয়
+2 | সিট পরীক্ষা: শক্ত করে লাগানো, ভিতরে পানি, ময়লা বা অন্য জিনিস নেই
+3 | সিট বেল্ট / সিটের লক: বাকল ঠিক কাজ করে, কিছু ঢিলা নয়
+4 | টায়ার পরিষ্কার: খাঁজে পাথর বা ময়লা নেই
+5 | লাল চাকা পরীক্ষা: দুই পাশে সমান ক্ষয় হয়েছে কিনা, বদলাতে হবে কিনা
+6 | সামনের চাকা ও পিছনের ঘোরানো চাকা সহজে ঘোরে
+7 | ব্যাটারি চার্জ: সব অতিরিক্ত ব্যাটারি পুরো চার্জ, চার্জার খুলে রাখা
+8 | চার্জ দেখুন: প্রতিটি কার্ট 80% বা বেশি (সংখ্যা আলাদা ফর্মে লিখুন)
+9 | চার্জিং জায়গা গোছানো: তার গুছিয়ে রাখা, চার্জার ভাঙা নয়, বেশি গরম নয়
+10 | চালু করে পরীক্ষা: ড্যাশবোর্ড জ্বলে, কোনো এরর কোড নেই, তার ও মোটরের আওয়াজ স্বাভাবিক
+11 | ব্রেক পরীক্ষা: ব্রেক যথেষ্ট জোরে ধরে
+12 | এক্সেলারেটর: চেপে ছেড়ে দিলে প্যাডেল নিজে থেকে পুরো ফিরে আসে
+13 | স্টিয়ারিং: দুই দিকে পুরো ঘোরে, সহজে ঘোরে, আটকায় না
+14 | স্পিড লিমিট পরীক্ষা: সব কার্টের গতি এক রকম
+15 | ট্র্যাক পরীক্ষা করুন, কোথাও ভাঙা থাকলে সাথে সাথে ঠিক করুন
+16 | খারাপ কার্টে ট্যাগ লাগিয়ে আলাদা রাখুন, মেরামতের ফর্ম পূরণ করুন
+17 | খুচরা যন্ত্রাংশ: লাল চাকা, ব্যাটারি, স্ক্রু, চার্জার — কম থাকলে জানান
+`
+};
+/* 分类名、时间的孟加拉文（用华文找） */
+var BN_WORDS = {
+  '开店前': 'খোলার আগে', '每天': 'প্রতিদিন', '关店': 'বন্ধের সময়', '营业中': 'খোলা থাকার সময়',
+  '早上': 'সকালে', '关店前': 'বন্ধের আগে', '每小时': 'প্রতি ঘণ্টায়', '有需要时': 'দরকার হলে',
+  '赛道区': 'ট্র্যাক এলাকা', 'Pit 区': 'Pit এলাকা', '接待区': 'লাউঞ্জ / রিসেপশন',
+  '头盔与护具区': 'হেলমেট ও সুরক্ষা সরঞ্জাম', '工具与物资': 'যন্ত্রপাতি ও জিনিসপত্র',
+  '安全检查': 'নিরাপত্তা পরীক্ষা', '开业前最终确认': 'খোলার আগে শেষ পরীক্ষা',
+  '关店清洁': 'বন্ধের আগে পরিষ্কার', '顾客遗留物品': 'গ্রাহকের ফেলে যাওয়া জিনিস',
+  '电源与设备（逐样确认关好）': 'বিদ্যুৎ ও যন্ত্র (প্রতিটি বন্ধ কিনা দেখুন)', '最后确认': 'শেষ পরীক্ষা',
+  '车身与车架': 'বডি ও ফ্রেম', '轮胎': 'টায়ার', '动力与充电': 'ব্যাটারি ও চার্জিং',
+  '操作测试': 'চালিয়ে পরীক্ষা', '场地与备件': 'ট্র্যাক ও খুচরা যন্ত্রাংশ'
+};
+
 var BRANCHES = [
   { code: 'SP', name: 'Sunway Pyramid' },
   { code: 'SF', name: 'Sunshine Farlim' },
@@ -406,12 +531,13 @@ var BRANCHES = [
   { code: 'GP', name: 'Gurney Paragon' }
 ];
 var ROLES = {
-  A: { zh: '收银', en: 'Cashier', color: '#1d5fc4', ink: '#ffffff', soft: '#e6eefc' },
-  B: { zh: '开店店员', en: 'Opening Crew', color: '#1f8f47', ink: '#ffffff', soft: '#e2f3e8' },
-  C: { zh: '关店店员', en: 'Closing Crew', color: '#74c7ef', ink: '#0b2f45', soft: '#e1f3fc' },
-  D: { zh: '维修', en: 'Maintenance', color: '#f28a1e', ink: '#2a1500', soft: '#fff0de' }
+  A: { zh: '收银', en: 'Cashier', bn: 'ক্যাশিয়ার', color: '#1d5fc4', ink: '#ffffff', soft: '#e6eefc' },
+  B: { zh: '开店店员', en: 'Opening Crew', bn: 'দোকান খোলার কর্মী', color: '#1f8f47', ink: '#ffffff', soft: '#e2f3e8' },
+  C: { zh: '关店店员', en: 'Closing Crew', bn: 'দোকান বন্ধের কর্মী', color: '#74c7ef', ink: '#0b2f45', soft: '#e1f3fc' },
+  D: { zh: '维修', en: 'Maintenance', bn: 'মেরামত', color: '#f28a1e', ink: '#2a1500', soft: '#fff0de' }
 };
 var ROLE_ORDER = ['A', 'B', 'C', 'D'];
+var NEUTRAL = { color: '#15171a', ink: '#ffffff', soft: '#eef0f3' };
 
 /* 凌晨 4 点前还算前一天（关店做到半夜也不会被清空） */
 var DAY_START_HOUR = 4;
@@ -422,12 +548,56 @@ var TIME_EN = {
 };
 var WEEK_ZH = '日一二三四五六';
 var WEEK_EN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+var WEEK_BN = ['রবিবার', 'সোমবার', 'মঙ্গলবার', 'বুধবার', 'বৃহস্পতিবার', 'শুক্রবার', 'শনিবার'];
 var DAY_CHARS = { '日': 0, '天': 0, '一': 1, '二': 2, '三': 3, '四': 4, '五': 5, '六': 6 };
 var BRANCH_ALIAS = { SP: 'SP', SF: 'SF', AC: 'AC', QP: 'QP', GP: 'GP',
   PYRAMID: 'SP', FARLIM: 'SF', QUEENSPARK: 'QP', PARAGON: 'GP', GURNEY: 'GP' };
 
+/* ---------------- 介面文字（三种语言） ---------------- */
+var LANGS = [['zh', '中文', 'zh-Hans'], ['en', 'English', 'en'], ['bn', 'বাংলা', 'bn']];
+var T = {
+  appTitle:     { zh: '每日工作表', en: 'Daily Checklist', bn: 'দৈনিক কাজের তালিকা' },
+  chooseOutlet: { zh: '选分行', en: 'Choose outlet', bn: 'আউটলেট বেছে নিন' },
+  chooseRole:   { zh: '选岗位（可以选几个）', en: 'Choose your job (can pick more than one)', bn: 'আপনার কাজ বেছে নিন (একাধিক বাছতে পারেন)' },
+  yourName:     { zh: '你的名字', en: 'Your name', bn: 'আপনার নাম' },
+  namePh:       { zh: '例如：阿明　e.g. Ah Ming', en: 'e.g. Ah Ming', bn: 'যেমন: Rahim' },
+  start:        { zh: '开始', en: 'Start', bn: 'শুরু করুন' },
+  stillNeed:    { zh: '还差：', en: 'Still need: ', bn: 'এখনও বাকি: ' },
+  needOutlet:   { zh: '分行', en: 'outlet', bn: 'আউটলেট' },
+  needRole:     { zh: '岗位', en: 'job', bn: 'কাজ' },
+  needName:     { zh: '名字', en: 'name', bn: 'নাম' },
+  change:       { zh: '更换', en: 'Change', bn: 'বদলান' },
+  done:         { zh: '完成', en: 'Done', bn: 'সম্পন্ন' },
+  allDone:      { zh: '全部完成', en: 'All done ✓', bn: 'সব শেষ' },
+  tapHint:      { zh: '按一下打勾，再按一下取消', en: 'Tap to tick · tap again to untick', bn: 'একবার চাপলে টিক, আবার চাপলে টিক উঠে যাবে' },
+  karts:        { zh: '今天检查车号', en: 'Kart numbers checked today', bn: 'আজ যে কার্টগুলো চেক করেছেন (নম্বর)' },
+  kartsPh:      { zh: '例如 1-12　e.g. 1-12', en: 'e.g. 1-12', bn: 'যেমন 1-12' },
+  note:         { zh: '今天的异常／需要跟进（可不填）', en: 'Problems / follow-up today (can leave empty)', bn: 'আজকের সমস্যা / পরে যা দেখতে হবে (খালি রাখতে পারেন)' },
+  notePh:       { zh: '没有可以不填　Leave empty if nothing', en: 'Leave empty if nothing', bn: 'কিছু না থাকলে খালি রাখুন' },
+  sendPdf:      { zh: 'WhatsApp 发送 PDF', en: 'Send PDF on WhatsApp', bn: 'WhatsApp-এ PDF পাঠান' },
+  sendHint:     { zh: '选 WhatsApp → 选工作群 → 按发送', en: 'Pick WhatsApp → your work group → send', bn: 'WhatsApp বাছুন → কাজের গ্রুপ বাছুন → পাঠান' },
+  textOnly:     { zh: '只发文字（备用）', en: 'Send as a text message instead', bn: 'শুধু লেখা পাঠান (বিকল্প)' },
+  language:     { zh: '语言', en: 'Language', bn: 'ভাষা' },
+  sentPdf:      { zh: '已分享 PDF', en: 'PDF shared — make sure it was sent in WhatsApp', bn: 'PDF শেয়ার হয়েছে — WhatsApp-এ পাঠানো হয়েছে কিনা দেখুন' },
+  sentFile:     { zh: 'PDF 已存到手机', en: 'PDF saved — send it in WhatsApp (📎 → Document)', bn: 'PDF ফোনে সেভ হয়েছে — WhatsApp-এ 📎 → Document দিয়ে পাঠান' },
+  sentText:     { zh: '已打开 WhatsApp（文字）', en: 'Opened WhatsApp (text) — make sure you pressed send', bn: 'WhatsApp খোলা হয়েছে (লেখা) — পাঠান চাপতে ভুলবেন না' },
+  newDay:       { zh: '新的一天，工作表已清空', en: 'New day — checklist cleared', bn: 'নতুন দিন — তালিকা খালি করা হয়েছে' },
+  allDoneToast: { zh: '🎉 全部完成！记得按 WhatsApp 发送', en: '🎉 All done! Remember to send on WhatsApp', bn: '🎉 সব শেষ! WhatsApp-এ পাঠাতে ভুলবেন না' },
+  pdfSaved:     { zh: 'PDF 已存到手机。到 WhatsApp 工作群按 📎 → 文件，选它发送', en: 'PDF saved. In WhatsApp tap 📎 → Document to send it', bn: 'PDF সেভ হয়েছে। WhatsApp-এ 📎 → Document চেপে পাঠান' },
+  pdfFail:      { zh: '做 PDF 失败，请用「只发文字」', en: 'Could not make the PDF — send as text instead', bn: 'PDF তৈরি করা যায়নি — শুধু লেখা পাঠান' },
+  installTitle: { zh: '加到主屏幕，像 app 一样打开', en: 'Add to Home Screen — opens like an app', bn: 'হোম স্ক্রিনে যোগ করুন — অ্যাপের মতো খুলবে' },
+  installBtn:   { zh: '加到主屏幕', en: 'Add to Home Screen', bn: 'হোম স্ক্রিনে যোগ করুন' },
+  ios1:         { zh: '用 Safari 打开，按下面的分享按钮', en: 'Open in Safari, tap the Share button', bn: 'Safari-তে খুলুন, নিচের Share বোতাম চাপুন' },
+  ios2:         { zh: '往下滑，选「添加到主屏幕」', en: 'Scroll down, tap “Add to Home Screen”', bn: 'নিচে নামুন, “Add to Home Screen” চাপুন' },
+  ios3:         { zh: '按「添加」', en: 'Tap “Add”', bn: '“Add” চাপুন' },
+  iosNote:      { zh: '从主屏幕第一次打开时，要再选一次分行和岗位。', en: 'The first time you open it from the Home Screen, choose outlet and job again.', bn: 'হোম স্ক্রিন থেকে প্রথমবার খুললে আবার আউটলেট আর কাজ বেছে নিতে হবে।' },
+  and1:         { zh: '按浏览器右上角 ⋮', en: 'Tap the ⋮ menu (top right)', bn: 'ব্রাউজারের উপরে ডানদিকে ⋮ চাপুন' },
+  and2:         { zh: '选「加到主屏幕」或「安装应用」', en: 'Tap “Add to Home screen” or “Install app”', bn: '“Add to Home screen” বা “Install app” চাপুন' }
+};
+
 var KEY_PROFILE = 'dlap-checklist.profile.v1';
 var KEY_DAY = 'dlap-checklist.day.v1';
+var KEY_LANG = 'dlap-checklist.lang.v1';
 
 var CHECK_SVG = '<svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.6l4.4 4.4L19 7.4" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -458,8 +628,16 @@ function autoShort(zh) {
   return zh.replace(PAREN, function (all, inner) { return parenRule(inner) ? '' : all; })
            .split(/[：:，]/)[0].trim();
 }
+function parseBn(text) {
+  var map = {};
+  (text || '').split('\n').forEach(function (raw) {
+    var i = raw.indexOf('|');
+    if (i > 0) map[raw.slice(0, i).trim()] = raw.slice(i + 1).trim();
+  });
+  return map;
+}
 function parseTasks(text, role) {
-  var groups = [], g = null;
+  var groups = [], g = null, bn = parseBn(BN[role]);
   text.split('\n').forEach(function (raw) {
     var line = raw.trim();
     if (!line) return;
@@ -473,7 +651,7 @@ function parseTasks(text, role) {
     if (c.length < 3 || !g) return;
     var rule = parseRule(c[1]);
     g.items.push({
-      id: role + '-' + c[0], n: c[0], zh: c[1], en: c[2], time: c[3] || '',
+      id: role + '-' + c[0], role: role, n: c[0], zh: c[1], en: c[2], bn: bn[c[0]] || '', time: c[3] || '',
       short: c[4] || autoShort(c[1]), days: rule.days || null, branches: rule.branches || null
     });
   });
@@ -509,11 +687,21 @@ function store(k, v) {
   try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
 }
 
-var profile = load(KEY_PROFILE);
+/* 旧版只存一个岗位（role），新版是 roles 列表 */
+function normProfile(p) {
+  if (!p || typeof p !== 'object') return null;
+  if (!Array.isArray(p.roles)) p.roles = p.role ? [p.role] : [];
+  p.roles = ROLE_ORDER.filter(function (r) { return p.roles.indexOf(r) !== -1; });
+  delete p.role;
+  return p;
+}
+var profile = normProfile(load(KEY_PROFILE));
 var day = null;
+var lang = load(KEY_LANG);
+if (!LANGS.some(function (l) { return l[0] === lang; })) lang = /^bn/i.test(navigator.language || '') ? 'bn' : 'zh';
 
 function validProfile() {
-  return !!(profile && ROLES[profile.role] && BRANCHES.some(function (b) { return b.code === profile.branch; }) &&
+  return !!(profile && profile.roles.length && BRANCHES.some(function (b) { return b.code === profile.branch; }) &&
             typeof profile.name === 'string' && profile.name.trim());
 }
 /* 换天就清空。返回 true = 刚刚换了一天 */
@@ -528,12 +716,66 @@ function ensureDay() {
   }
   return false;
 }
+/* 每个分行一份记录（几个岗位一起） */
 function current() {
-  var k = profile.branch + '|' + profile.role;
-  if (!day.lists[k]) day.lists[k] = { done: {}, note: '', karts: '', sentAt: null };
+  var k = profile.branch;
+  if (!day.lists[k]) {
+    var L = { done: {}, note: '', karts: '', sentAt: null };
+    Object.keys(day.lists).forEach(function (key) {      // 旧版资料：按「分行|岗位」分开存
+      if (key.indexOf(k + '|') !== 0) return;
+      var o = day.lists[key] || {};
+      Object.assign(L.done, o.done || {});
+      if (o.note && !L.note) L.note = o.note;
+      if (o.karts && !L.karts) L.karts = o.karts;
+    });
+    day.lists[k] = L;
+  }
   return day.lists[k];
 }
 function persist() { store(KEY_DAY, day); }
+
+function branchOf(code) { return BRANCHES.filter(function (b) { return b.code === code; })[0]; }
+function multi() { return profile.roles.length > 1; }
+function numLabel(it) { return (multi() ? it.role : '') + it.n; }
+function rolesZh() { return profile.roles.map(function (r) { return r + ' ' + ROLES[r].zh; }).join(' + '); }
+function rolesEn() { return profile.roles.map(function (r) { return ROLES[r].en; }).join(' + '); }
+function theme() { return multi() ? NEUTRAL : ROLES[profile.roles[0]]; }
+
+/* 今天要做的：按岗位分段；两个岗位有同一项工作只出现一次 */
+var today = { sections: [], flat: [] };
+function buildToday() {
+  var dow = bizDate().getDay(), seen = {}, out = { sections: [], flat: [] };
+  profile.roles.forEach(function (r) {
+    var groups = [];
+    GROUPS[r].forEach(function (g) {
+      var items = g.items.filter(function (it) {
+        if (!applies(it, profile.branch, dow) || seen[it.zh]) return false;
+        seen[it.zh] = true;
+        return true;
+      });
+      if (!items.length) return;
+      groups.push({ g: g, items: items });
+      items.forEach(function (it) { out.flat.push(it); });
+    });
+    if (groups.length) out.sections.push({ role: r, groups: groups });
+  });
+  return out;
+}
+
+/* ---------------- 语言 ---------------- */
+function tx(key) { var d = T[key]; return d[lang] || d.en; }
+function txSub(key) { return lang === 'en' ? '' : T[key].en; }
+function fill(node, main, sub) {
+  node.textContent = main;
+  if (sub) node.appendChild(el('span', 'en', sub));
+}
+function itemMain(it) { return lang === 'zh' ? it.zh : lang === 'bn' ? (it.bn || it.en) : it.en; }
+function itemSub(it) { return lang === 'zh' || (lang === 'bn' && it.bn) ? it.en : ''; }
+function wordMain(zh, en) { return lang === 'zh' ? zh : lang === 'bn' ? (BN_WORDS[zh] || en || zh) : (en || zh); }
+function wordSub(zh, en) { return en && (lang === 'zh' || (lang === 'bn' && BN_WORDS[zh])) ? en : ''; }
+function weekLabel(dow) {
+  return lang === 'zh' ? '（' + WEEK_ZH[dow] + '）' : ' (' + (lang === 'bn' ? WEEK_BN : WEEK_EN)[dow] + ')';
+}
 
 /* ---------------- 小工具 ---------------- */
 function $(id) { return document.getElementById(id); }
@@ -549,17 +791,17 @@ function setTheme(color) {
 }
 function buzz() { try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {} }
 var toastTimer = null;
-function toast(zh, en, ms) {
+function toast(key, ms) {
   var t = $('toast');
-  t.textContent = zh;
-  if (en) t.appendChild(el('small', '', en));
+  t.textContent = tx(key);
+  if (txSub(key)) t.appendChild(el('small', '', txSub(key)));
   t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function () { t.classList.remove('show'); }, ms || 2800);
 }
 
 /* ================= 第一页 ================= */
-var pick = { branch: null, role: null };
+var pick = { branch: null, roles: [] };
 
 function buildSetup() {
   var bl = $('branchList');
@@ -575,26 +817,37 @@ function buildSetup() {
   });
   var rg = $('roleGrid');
   ROLE_ORDER.forEach(function (code) {
-    var r = ROLES[code];
     var btn = el('button', 'opt-role');
     btn.type = 'button';
     btn.dataset.role = code;
     btn.appendChild(el('span', 'letter', code));
-    btn.appendChild(el('span', 'zh', r.zh));
-    btn.appendChild(el('span', 'sub', r.en));
+    btn.appendChild(el('span', 'zh'));
+    btn.appendChild(el('span', 'sub'));
     var ok = el('span', 'ok'); ok.innerHTML = CHECK_SVG; btn.appendChild(ok);
-    btn.addEventListener('click', function () { pick.role = code; buzz(); syncSetup(); });
+    btn.addEventListener('click', function () {
+      var i = pick.roles.indexOf(code);
+      if (i === -1) pick.roles.push(code); else pick.roles.splice(i, 1);
+      pick.roles = ROLE_ORDER.filter(function (r) { return pick.roles.indexOf(r) !== -1; });
+      buzz(); syncSetup();
+    });
     rg.appendChild(btn);
   });
   $('nameInput').addEventListener('input', syncSetup);
   $('nameInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); this.blur(); } });
   $('startBtn').addEventListener('click', onStart);
 }
+function labelRoles() {
+  document.querySelectorAll('.opt-role').forEach(function (b) {
+    var r = ROLES[b.dataset.role];
+    b.querySelector('.zh').textContent = r[lang];
+    b.querySelector('.sub').textContent = lang === 'en' ? '' : r.en;
+  });
+}
 function missingSteps() {
   var m = [];
-  if (!pick.branch) m.push(['stepBranch', '分行', 'outlet']);
-  if (!pick.role) m.push(['stepRole', '岗位', 'job']);
-  if (!$('nameInput').value.trim()) m.push(['stepName', '名字', 'name']);
+  if (!pick.branch) m.push(['stepBranch', 'needOutlet']);
+  if (!pick.roles.length) m.push(['stepRole', 'needRole']);
+  if (!$('nameInput').value.trim()) m.push(['stepName', 'needName']);
   return m;
 }
 function syncSetup() {
@@ -602,18 +855,18 @@ function syncSetup() {
     b.setAttribute('aria-pressed', b.dataset.code === pick.branch ? 'true' : 'false');
   });
   document.querySelectorAll('.opt-role').forEach(function (b) {
-    b.setAttribute('aria-pressed', b.dataset.role === pick.role ? 'true' : 'false');
+    b.setAttribute('aria-pressed', pick.roles.indexOf(b.dataset.role) !== -1 ? 'true' : 'false');
   });
-  $('roleGrid').classList.toggle('has-pick', !!pick.role);
   var miss = missingSteps();
   $('startBtn').classList.toggle('not-ready', miss.length > 0);
   if (!miss.length) $('missing').textContent = '';
   else if ($('missing').textContent) showMissing(miss);
 }
 function showMissing(miss) {
-  var m = $('missing');
-  m.textContent = '还差：' + miss.map(function (x) { return x[1]; }).join('、');
-  m.appendChild(el('span', 'en', 'Still need: ' + miss.map(function (x) { return x[2]; }).join(', ')));
+  var sep = lang === 'zh' ? '、' : ', ';
+  fill($('missing'),
+    tx('stillNeed') + miss.map(function (x) { return tx(x[1]); }).join(sep),
+    lang === 'en' ? '' : T.stillNeed.en + miss.map(function (x) { return T[x[1]].en; }).join(', '));
 }
 function onStart() {
   var miss = missingSteps();
@@ -625,16 +878,16 @@ function onStart() {
     if (miss[0][0] === 'stepName') setTimeout(function () { $('nameInput').focus(); }, 350);
     return;
   }
-  profile = { branch: pick.branch, role: pick.role, name: $('nameInput').value.trim() };
+  profile = { branch: pick.branch, roles: pick.roles.slice(), name: $('nameInput').value.trim() };
   store(KEY_PROFILE, profile);
   if (history.state && history.state.s === 'setup') history.back();
   else showWork();
 }
 function showSetup() {
   document.body.removeAttribute('data-role');
-  setTheme('#15171a');
+  setTheme(NEUTRAL.color);
   pick.branch = profile && profile.branch || null;
-  pick.role = profile && profile.role || null;
+  pick.roles = profile ? profile.roles.slice() : [];
   $('nameInput').value = profile && profile.name || '';
   $('missing').textContent = '';
   syncSetup();
@@ -644,8 +897,6 @@ function showSetup() {
 }
 
 /* ================= 工作页 ================= */
-var todays = [];
-
 function showWork() {
   $('setup').hidden = true;
   $('work').hidden = false;
@@ -654,41 +905,54 @@ function showWork() {
 }
 function renderWork() {
   ensureDay();
-  var role = ROLES[profile.role];
-  var br = BRANCHES.filter(function (b) { return b.code === profile.branch; })[0];
-  var d = bizDate(), dow = d.getDay();
-  document.body.dataset.role = profile.role;
-  setTheme(role.color);
+  var br = branchOf(profile.branch), d = bizDate(), dow = d.getDay(), isMulti = multi();
+  if (isMulti) document.body.removeAttribute('data-role'); else document.body.dataset.role = profile.roles[0];
+  setTheme(theme().color);
 
-  $('badge').textContent = profile.role;
-  $('whoZh').textContent = role.zh + ' · ' + br.code;
-  $('whoEn').textContent = role.en + ' · ' + br.name;
-  $('dateZh').textContent = fmtDate(d) + '（' + WEEK_ZH[dow] + '）';
-  $('dateSub').textContent = WEEK_EN[dow] + ' · ' + profile.name;
+  var badge = $('badge');
+  badge.textContent = '';
+  badge.className = 'badge' + (isMulti ? ' multi' : '');
+  if (isMulti) profile.roles.forEach(function (r) { var s = el('span', '', r); s.dataset.role = r; badge.appendChild(s); });
+  else badge.textContent = profile.roles[0];
+  $('whoMain').textContent = profile.roles.map(function (r) { return ROLES[r][lang]; }).join(' + ') + ' · ' + br.code;
+  $('whoSub').textContent = (lang === 'en' ? '' : rolesEn() + ' · ') + br.name;
+  $('dateMain').textContent = fmtDate(d) + weekLabel(dow);
+  $('dateSub').textContent = (lang === 'en' ? '' : WEEK_EN[dow] + ' · ') + profile.name;
 
-  var L = current();
-  var list = $('list');
+  today = buildToday();
+  var L = current(), list = $('list');
   list.textContent = '';
-  todays = [];
-  GROUPS[profile.role].forEach(function (g) {
-    var items = g.items.filter(function (it) { return applies(it, profile.branch, dow); });
-    if (!items.length) return;
-    var sec = el('section', 'group');
-    sec.dataset.ids = items.map(function (it) { return it.id; }).join(',');
-    var h = el('h2', 'group-h');
-    var t = el('span', 'group-t');
-    t.appendChild(el('span', 'group-zh', g.zh));
-    if (g.en) t.appendChild(el('span', 'group-en', g.en));
-    h.appendChild(t);
-    h.appendChild(el('span', 'group-count'));
-    sec.appendChild(h);
-    var tiles = el('div', 'tiles');
-    items.forEach(function (it) { todays.push(it); tiles.appendChild(makeTile(it, !!L.done[it.id])); });
-    sec.appendChild(tiles);
-    list.appendChild(sec);
+  today.sections.forEach(function (sec) {
+    var wrap = el('div', 'role-sec');
+    wrap.dataset.role = sec.role;
+    var all = [];
+    if (isMulti) {
+      var h = el('div', 'role-h');
+      h.appendChild(el('span', 'rl', sec.role));
+      var rn = el('span', 'rn', ROLES[sec.role][lang]);
+      if (lang !== 'en') rn.appendChild(el('span', 'en', ROLES[sec.role].en));
+      h.appendChild(rn);
+      h.appendChild(el('span', 'rc'));
+      wrap.appendChild(h);
+    }
+    sec.groups.forEach(function (gg) {
+      var g = gg.g, box = el('section', 'group');
+      box.dataset.ids = gg.items.map(function (it) { return it.id; }).join(',');
+      var gh = el('h2', 'group-h'), gt = el('span', 'group-t');
+      fill(gt, wordMain(g.zh, g.en), wordSub(g.zh, g.en));
+      gh.appendChild(gt);
+      gh.appendChild(el('span', 'group-count'));
+      box.appendChild(gh);
+      var tiles = el('div', 'tiles');
+      gg.items.forEach(function (it) { all.push(it.id); tiles.appendChild(makeTile(it, !!L.done[it.id])); });
+      box.appendChild(tiles);
+      wrap.appendChild(box);
+    });
+    wrap.dataset.ids = all.join(',');
+    list.appendChild(wrap);
   });
 
-  $('kartCard').hidden = profile.role !== 'D';
+  $('kartCard').hidden = profile.roles.indexOf('D') === -1;
   $('kartInput').value = L.karts || '';
   $('noteInput').value = L.note || '';
   updateProgress(false);
@@ -700,13 +964,14 @@ function makeTile(it, done) {
   b.setAttribute('aria-pressed', done ? 'true' : 'false');
   var tick = el('span', 'tick'); tick.innerHTML = CHECK_SVG; b.appendChild(tick);
   var body = el('span', 't-body');
-  body.appendChild(el('span', 't-zh', it.zh));
-  body.appendChild(el('span', 't-en', it.en));
+  body.appendChild(el('span', 't-main', itemMain(it)));
+  if (itemSub(it)) body.appendChild(el('span', 't-sub', itemSub(it)));
   var meta = el('span', 't-meta');
-  meta.appendChild(el('span', 'chip', '#' + it.n));
+  meta.appendChild(el('span', 'chip', '#' + numLabel(it)));
   if (it.time) {
-    var chip = el('span', 'chip', it.time);
-    if (TIME_EN[it.time]) chip.appendChild(el('span', 'en', ' ' + TIME_EN[it.time]));
+    var chip = el('span', 'chip', wordMain(it.time, TIME_EN[it.time]));
+    var ts = wordSub(it.time, TIME_EN[it.time]);
+    if (ts) chip.appendChild(el('span', 'en', ' ' + ts));
     meta.appendChild(chip);
   }
   body.appendChild(meta);
@@ -717,7 +982,7 @@ function checkNewDay() {
   if (!ensureDay()) return false;
   if (!$('work').hidden && validProfile()) {
     renderWork();
-    toast('新的一天，工作表已清空', 'New day — checklist cleared');
+    toast('newDay');
   }
   return true;
 }
@@ -732,57 +997,59 @@ function toggle(tile) {
 }
 function stats() {
   var L = current(), done = 0, undone = [];
-  todays.forEach(function (it) { if (L.done[it.id]) done++; else undone.push(it); });
-  return { done: done, total: todays.length, undone: undone };
+  today.flat.forEach(function (it) { if (L.done[it.id]) done++; else undone.push(it); });
+  return { done: done, total: today.flat.length, undone: undone };
+}
+function countIds(ids) {
+  var L = current(), n = 0;
+  ids.forEach(function (id) { if (L.done[id]) n++; });
+  return n;
 }
 function updateProgress(fromTap) {
-  var L = current(), s = stats();
+  var s = stats();
   var all = s.total > 0 && s.done === s.total;
   $('doneN').textContent = s.done;
   $('totalN').textContent = s.total;
   $('meter').style.width = (s.total ? s.done / s.total * 100 : 0) + '%';
-  var cl = $('countL');
-  cl.textContent = all ? '全部完成' : '完成';
-  cl.appendChild(el('small', '', all ? 'All done ✓' : 'Done'));
+  fill($('countL'), tx(all ? 'allDone' : 'done'), txSub(all ? 'allDone' : 'done'));
   document.querySelectorAll('#list .group').forEach(function (sec) {
-    var ids = sec.dataset.ids.split(','), n = 0;
-    ids.forEach(function (id) { if (L.done[id]) n++; });
+    var ids = sec.dataset.ids.split(','), n = countIds(ids);
     sec.querySelector('.group-count').textContent = n + '/' + ids.length;
     sec.classList.toggle('done', n === ids.length);
   });
-  if (fromTap && all) toast('🎉 全部完成！记得按 WhatsApp 发送', 'All done! Remember to send on WhatsApp');
+  document.querySelectorAll('#list .role-sec').forEach(function (sec) {
+    var rc = sec.querySelector('.rc');
+    if (!rc) return;
+    var ids = sec.dataset.ids.split(',');
+    rc.textContent = countIds(ids) + '/' + ids.length;
+  });
+  if (fromTap && all) toast('allDoneToast');
   refreshMessage();
 }
 
-/* ---------------- WhatsApp 讯息 ---------------- */
+/* ---------------- WhatsApp 文字讯息（报告固定用华文） ---------------- */
 function buildMessage() {
   var L = current(), s = stats(), d = bizDate();
-  var role = ROLES[profile.role];
   var lines = [
     'D LAP 每日工作 ' + fmtDate(d) + '（' + WEEK_ZH[d.getDay()] + '）',
-    '分行：' + profile.branch + '　岗位：' + profile.role + ' ' + role.zh,
+    '分行：' + profile.branch + '　岗位：' + rolesZh(),
     '填写：' + profile.name,
     '完成 ' + s.done + '/' + s.total,
-    '未做：' + (s.undone.length ? s.undone.map(function (it) { return '#' + it.n + ' ' + it.short; }).join('、') : '无')
+    '未做：' + (s.undone.length ? s.undone.map(function (it) { return '#' + numLabel(it) + ' ' + it.short; }).join('、') : '无')
   ];
-  if (profile.role === 'D') lines.push('检查车号：' + ((L.karts || '').trim() || '（没填）'));
+  if (profile.roles.indexOf('D') !== -1) lines.push('检查车号：' + ((L.karts || '').trim() || '（没填）'));
   var note = (L.note || '').trim();
   if (note) lines.push('异常：' + note);
   return lines.join('\n');
 }
-var SENT_TEXT = {
-  pdf:  ['已分享 PDF', 'PDF shared — make sure it was sent in WhatsApp'],
-  file: ['PDF 已存到手机', 'PDF saved — send it in WhatsApp (📎 → Document)'],
-  text: ['已打开 WhatsApp（文字）', 'Opened WhatsApp (text) — make sure you pressed send']
-};
+var SENT_KEY = { pdf: 'sentPdf', file: 'sentFile', text: 'sentText' };
 function refreshMessage() {
   $('textBtn').href = 'https://wa.me/?text=' + encodeURIComponent(buildMessage());
   var L = current(), sn = $('sentNote');
   if (L.sentAt) {
-    var t = SENT_TEXT[L.sentKind] || SENT_TEXT.text;
+    var key = SENT_KEY[L.sentKind] || 'sentText';
     sn.hidden = false;
-    sn.textContent = '✓ ' + fmtTime(L.sentAt) + ' ' + t[0];
-    sn.appendChild(el('span', 'en', fmtTime(L.sentAt) + ' · ' + t[1]));
+    fill(sn, '✓ ' + fmtTime(L.sentAt) + ' ' + tx(key), txSub(key));
   } else {
     sn.hidden = true;
   }
@@ -795,10 +1062,10 @@ function markSent(kind) {
   refreshMessage();
 }
 
-/* ---------------- PDF 报告（在手机里直接做，不用上网） ---------------- */
+/* ---------------- PDF 报告（在手机里直接做，不用上网；固定华文 + 英文） ---------------- */
 var PDF_W = 595.28, PDF_H = 841.89;   // A4（point）
 var PDF_S = 2.5;                       // 画质：约 180 dpi
-var PDF_FONT = '"PingFang SC","Hiragino Sans GB","Heiti SC","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","Droid Sans Fallback",sans-serif';
+var PDF_FONT = '"PingFang SC","Hiragino Sans GB","Heiti SC","Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei","Droid Sans Fallback","Noto Sans Bengali","Kohinoor Bangla",sans-serif';
 var NO_LINE_START = /^[，、。：；！？）」』】,.:;!?)]/;
 
 function pf(size, weight) { return (weight || 400) + ' ' + size + 'px ' + PDF_FONT; }
@@ -828,8 +1095,7 @@ function fitFont(ctx, str, maxW, size, weight) {
 }
 
 function renderReportPages() {
-  var role = ROLES[profile.role];
-  var br = BRANCHES.filter(function (b) { return b.code === profile.branch; })[0];
+  var th = theme(), isMulti = multi(), br = branchOf(profile.branch);
   var d = bizDate(), dow = d.getDay(), L = current(), s = stats(), now = Date.now();
   var dateStr = fmtDate(d) + '（' + WEEK_ZH[dow] + '）';
   var X0 = 34, X1 = PDF_W - 34, TW = X1 - X0, BOTTOM = PDF_H - 42;
@@ -838,6 +1104,11 @@ function renderReportPages() {
 
   function txt(str, x, yy, size, weight, color, align) {
     ctx.font = pf(size, weight); ctx.fillStyle = color; ctx.textAlign = align || 'left';
+    ctx.fillText(str, x, yy);
+  }
+  function fitTxt(str, x, yy, maxW, size, weight, color, align) {
+    fitFont(ctx, str, maxW, size, weight);
+    ctx.fillStyle = color; ctx.textAlign = align || 'left';
     ctx.fillText(str, x, yy);
   }
   function box(x, yy, w, h, fill, stroke) {
@@ -857,13 +1128,13 @@ function renderReportPages() {
   function room(h) { if (y + h > BOTTOM) newPage(); }
 
   function drawTop() {
-    box(0, 0, PDF_W, 78, role.color);
-    txt('D LAP 每日工作表', X0, 38, 22, 800, role.ink);
+    box(0, 0, PDF_W, 78, th.color);
+    txt('D LAP 每日工作表', X0, 38, 22, 800, th.ink);
     ctx.globalAlpha = 0.8;
-    txt('Daily Checklist', X0, 57, 11, 400, role.ink);
-    txt(role.en, X1, 57, 11, 400, role.ink, 'right');
+    txt('Daily Checklist', X0, 57, 11, 400, th.ink);
+    fitTxt(rolesEn(), X1, 57, 300, 11, 400, th.ink, 'right');
     ctx.globalAlpha = 1;
-    txt(profile.role + ' ' + role.zh, X1, 38, 20, 800, role.ink, 'right');
+    fitTxt(rolesZh(), X1, 38, 300, 20, 800, th.ink, 'right');
     y = 92;
     var cells = [
       ['日期 Date', dateStr, 142],
@@ -875,26 +1146,22 @@ function renderReportPages() {
     cells.forEach(function (c) {
       box(x, y, c[2], 48, '#f6f7f9', '#d8dce2');
       txt(c[0], x + 10, y + 16, 9, 400, '#6b7380');
-      fitFont(ctx, c[1], c[2] - 20, 15, 700);
-      ctx.fillStyle = '#16181c'; ctx.textAlign = 'left';
-      ctx.fillText(c[1], x + 10, y + 38);
+      fitTxt(c[1], x + 10, y + 38, c[2] - 20, 15, 700, '#16181c');
       x += c[2];
     });
     y += 58;
-    if (profile.role === 'D') {
-      var k = (L.karts || '').trim() || '（没填）';
+    if (profile.roles.indexOf('D') !== -1) {
+      var k = (L.karts || '').trim();
       box(X0, y, TW, 34, '#f6f7f9', '#d8dce2');
       txt('今天检查车号 Karts checked', X0 + 10, y + 21, 9, 400, '#6b7380');
-      fitFont(ctx, k, TW - 160, 13, 700);
-      ctx.fillStyle = (L.karts || '').trim() ? '#16181c' : '#c62020'; ctx.textAlign = 'left';
-      ctx.fillText(k, X0 + 150, y + 22);
+      fitTxt(k || '（没填）', X0 + 150, y + 22, TW - 160, 13, 700, k ? '#16181c' : '#c62020');
       y += 44;
     }
   }
   function drawTopSmall() {
-    box(0, 0, PDF_W, 34, role.color);
-    txt('D LAP 每日工作表（续）', X0, 22, 12, 800, role.ink);
-    txt(profile.branch + ' · ' + profile.role + ' ' + role.zh + ' · ' + dateStr, X1, 22, 10, 600, role.ink, 'right');
+    box(0, 0, PDF_W, 34, th.color);
+    txt('D LAP 每日工作表（续）', X0, 22, 12, 800, th.ink);
+    fitTxt(profile.branch + ' · ' + rolesZh() + ' · ' + dateStr, X1, 22, 330, 10, 600, th.ink, 'right');
     y = 48;
   }
   function drawTableHead() {
@@ -913,9 +1180,21 @@ function renderReportPages() {
     var h = Math.max(30, 21 + (zl.length - 1) * 14 + en.length * 10 + (en.length ? 3 : 0), 10 + tl.length * 12 + 6);
     return { zl: zl, en: en, tl: tl, h: h };
   }
-  function drawGroup(g, ids) {
-    var n = ids.filter(function (id) { return L.done[id]; }).length;
-    box(X0, y, TW, 20, role.soft);
+  function drawRole(r, ids) {
+    var R = ROLES[r], n = countIds(ids);
+    box(X0, y, TW, 24, R.color);
+    txt(r + ' ' + R.zh, X0 + 8, y + 16.5, 12, 800, R.ink);
+    ctx.font = pf(12, 800);
+    var w = ctx.measureText(r + ' ' + R.zh).width;
+    ctx.globalAlpha = 0.85;
+    txt(R.en, X0 + 16 + w, y + 16.5, 9, 400, R.ink);
+    ctx.globalAlpha = 1;
+    txt(n + '/' + ids.length, X1 - 8, y + 16.5, 11, 800, R.ink, 'right');
+    y += 24;
+  }
+  function drawGroup(g, ids, soft) {
+    var n = countIds(ids);
+    box(X0, y, TW, 20, soft);
     txt(g.zh, X0 + 6, y + 14, 11, 800, '#16181c');
     ctx.font = pf(11, 800);
     txt(g.en, X0 + 14 + ctx.measureText(g.zh).width, y + 14, 8.5, 400, '#6b7380');
@@ -925,7 +1204,7 @@ function renderReportPages() {
   function drawItem(it, m) {
     var ts = L.done[it.id], done = !!ts, base = y + 16;
     if (!done) box(X0, y, TW, m.h, '#fdeeee');
-    txt('#' + it.n, COL.no + 6, base, 10, 700, '#3d434b');
+    txt('#' + numLabel(it), COL.no + 6, base, 10, 700, '#3d434b');
     m.zl.forEach(function (ln, i) { txt(ln, COL.task + 6, base + i * 14, 11, 600, '#16181c'); });
     var ey = base + (m.zl.length - 1) * 14 + 12.5;
     m.en.forEach(function (ln, i) { txt(ln, COL.task + 6, ey + i * 10, 8, 400, '#6b7380'); });
@@ -962,7 +1241,7 @@ function renderReportPages() {
 
   newPage();
   if (s.undone.length) {
-    noteBox('未做 Not done（' + s.undone.length + '）', s.undone.map(function (it) { return '#' + it.n + ' ' + it.short; }).join('、'), 'bad');
+    noteBox('未做 Not done（' + s.undone.length + '）', s.undone.map(function (it) { return '#' + numLabel(it) + ' ' + it.short; }).join('、'), 'bad');
   } else {
     noteBox('全部完成 ✓ All done', '', 'good');
   }
@@ -972,13 +1251,18 @@ function renderReportPages() {
   y += 4;
   inTable = true;
   drawTableHead();
-  GROUPS[profile.role].forEach(function (g) {
-    var items = g.items.filter(function (it) { return applies(it, profile.branch, dow); });
-    if (!items.length) return;
-    var ms = items.map(measureItem);
-    room(20 + ms[0].h);
-    drawGroup(g, items.map(function (it) { return it.id; }));
-    items.forEach(function (it, i) { room(ms[i].h); drawItem(it, ms[i]); });
+  today.sections.forEach(function (sec) {
+    var R = ROLES[sec.role], first = true;
+    var ids = [];
+    sec.groups.forEach(function (gg) { gg.items.forEach(function (it) { ids.push(it.id); }); });
+    sec.groups.forEach(function (gg) {
+      var ms = gg.items.map(measureItem);
+      if (first && isMulti) { room(24 + 20 + ms[0].h); drawRole(sec.role, ids); }
+      first = false;
+      room(20 + ms[0].h);
+      drawGroup(gg.g, gg.items.map(function (it) { return it.id; }), isMulti ? R.soft : th.soft);
+      gg.items.forEach(function (it, i) { room(ms[i].h); drawItem(it, ms[i]); });
+    });
   });
   inTable = false;
 
@@ -987,7 +1271,7 @@ function renderReportPages() {
     ctx = cv.getContext('2d');
     ctx.strokeStyle = '#d8dce2'; ctx.lineWidth = 0.75;
     ctx.beginPath(); ctx.moveTo(X0, PDF_H - 30); ctx.lineTo(X1, PDF_H - 30); ctx.stroke();
-    txt('D LAP 每日工作表 · ' + profile.branch + ' · ' + profile.role + ' ' + role.zh + ' · ' + dateStr, X0, PDF_H - 17, 8, 400, '#8a919b');
+    txt('D LAP 每日工作表 · ' + profile.branch + ' · ' + profile.roles.join('+') + ' · ' + dateStr, X0, PDF_H - 17, 8, 400, '#8a919b');
     txt('产生时间 ' + made + ' · 第 ' + (i + 1) + '/' + pages.length + ' 页', X1, PDF_H - 17, 8, 400, '#8a919b', 'right');
   });
   return pages;
@@ -1044,7 +1328,7 @@ function buildPdf(images, title) {
 function reportFileName() {
   var d = bizDate();
   var nm = profile.name.replace(/[^A-Za-z0-9 ._-]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 30);
-  return ['DLAP', profile.branch, profile.role,
+  return ['DLAP', profile.branch, profile.roles.join('+'),
     pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear(), nm].filter(Boolean).join(' ') + '.pdf';
 }
 function makePdfFile() {
@@ -1055,8 +1339,7 @@ function makePdfFile() {
     return img;
   });
   var d = bizDate();
-  var blob = buildPdf(images, 'D LAP 每日工作 ' + fmtDate(d) + ' ' + profile.branch + ' ' +
-    profile.role + ' ' + ROLES[profile.role].zh + ' ' + profile.name);
+  var blob = buildPdf(images, 'D LAP 每日工作 ' + fmtDate(d) + ' ' + profile.branch + ' ' + rolesZh() + ' ' + profile.name);
   return new File([blob], reportFileName(), { type: 'application/pdf' });
 }
 function saveFile(file) {
@@ -1065,14 +1348,14 @@ function saveFile(file) {
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
   markSent('file');
-  toast('PDF 已存到手机。到 WhatsApp 工作群按 📎 → 文件，选它发送', 'PDF saved. In WhatsApp tap 📎 → Document to send it', 6000);
+  toast('pdfSaved', 6000);
 }
 /* 一定要在按钮的 click 里马上做完（iPhone 才肯打开分享选单） */
 function sharePdf() {
   if (checkNewDay()) return;
   var file;
   try { file = makePdfFile(); }
-  catch (err) { toast('做 PDF 失败，请用「只发文字」', 'Could not make the PDF — send as text instead', 5000); return; }
+  catch (err) { toast('pdfFail', 5000); return; }
   var data = { files: [file] };
   if (navigator.share && navigator.canShare && navigator.canShare(data)) {
     navigator.share(data).then(function () { markSent('pdf'); }, function (err) {
@@ -1111,6 +1394,39 @@ function bindWork() {
   });
 }
 
+/* ---------------- 语言按钮 ---------------- */
+function buildLangRows() {
+  document.querySelectorAll('.lang-row').forEach(function (row) {
+    LANGS.forEach(function (l) {
+      var b = el('button', 'lang-btn', l[1]);
+      b.type = 'button';
+      b.dataset.lang = l[0];
+      b.lang = l[2];
+      b.addEventListener('click', function () { setLang(l[0]); });
+      row.appendChild(b);
+    });
+  });
+}
+function setLang(code) {
+  if (code === lang) return;
+  lang = code;
+  store(KEY_LANG, lang);
+  buzz();
+  applyLang();
+}
+function applyLang() {
+  document.documentElement.lang = LANGS.filter(function (l) { return l[0] === lang; })[0][2];
+  document.querySelectorAll('[data-t]').forEach(function (n) { fill(n, tx(n.dataset.t), txSub(n.dataset.t)); });
+  document.querySelectorAll('[data-ph]').forEach(function (n) { n.placeholder = tx(n.dataset.ph); });
+  document.querySelectorAll('.lang-btn').forEach(function (b) {
+    b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+  });
+  labelRoles();
+  if ($('missing').textContent) showMissing(missingSteps());
+  renderInstall();
+  if (!$('work').hidden && validProfile()) renderWork();
+}
+
 /* ---------------- 加到主屏幕 ---------------- */
 var installPrompt = null;
 function isStandalone() {
@@ -1119,22 +1435,29 @@ function isStandalone() {
 function isIOS() {
   return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
-var SHARE_SVG = '<svg class="ios-share" viewBox="0 0 24 24" fill="none" stroke="#1d6fe0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="分享"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
+var SHARE_SVG = '<svg class="ios-share" viewBox="0 0 24 24" fill="none" stroke="#1d6fe0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
+function stepLi(key, icon) {
+  var li = el('li', '', tx(key));
+  if (icon) { var s = el('span'); s.innerHTML = ' ' + icon; li.appendChild(s); }
+  if (txSub(key)) li.appendChild(el('span', 'en', txSub(key)));
+  return li;
+}
 function renderInstall() {
   document.querySelectorAll('.install-slot').forEach(function (slot) {
+    var wasOpen = slot.firstChild ? slot.firstChild.open : !!slot.dataset.open;
     slot.textContent = '';
     if (isStandalone()) return;
     var det = el('details', 'install');
-    if (slot.dataset.open) det.open = true;
+    det.open = wasOpen;
     var sum = el('summary');
-    sum.innerHTML = '<span>📲</span>';
-    var st = el('span', '', '加到主屏幕，像 app 一样打开');
-    st.appendChild(el('span', 'en', 'Add to Home Screen — opens like an app'));
+    sum.appendChild(el('span', '', '📲'));
+    var st = el('span');
+    fill(st, tx('installTitle'), txSub('installTitle'));
     sum.appendChild(st);
     det.appendChild(sum);
     var body = el('div', 'install-body');
     if (installPrompt) {
-      var btn = el('button', 'install-btn', '加到主屏幕  Add');
+      var btn = el('button', 'install-btn', tx('installBtn'));
       btn.type = 'button';
       btn.addEventListener('click', function () {
         installPrompt.prompt();
@@ -1142,19 +1465,19 @@ function renderInstall() {
       });
       body.appendChild(btn);
     } else if (isIOS()) {
-      body.innerHTML =
-        '<ol>' +
-        '<li>用 Safari 打开，按下面的分享按钮 ' + SHARE_SVG + '<span class="en">Open in Safari, tap the Share button</span></li>' +
-        '<li>往下滑，选「添加到主屏幕」<span class="en">Scroll down, tap “Add to Home Screen”</span></li>' +
-        '<li>按「添加」<span class="en">Tap “Add”</span></li>' +
-        '</ol>' +
-        '<p class="note">从主屏幕第一次打开时，要再选一次分行和岗位。<span class="en">The first time you open it from the Home Screen, choose outlet and job again.</span></p>';
+      var ol = el('ol');
+      ol.appendChild(stepLi('ios1', SHARE_SVG));
+      ol.appendChild(stepLi('ios2'));
+      ol.appendChild(stepLi('ios3'));
+      body.appendChild(ol);
+      var note = el('p', 'note');
+      fill(note, tx('iosNote'), txSub('iosNote'));
+      body.appendChild(note);
     } else {
-      body.innerHTML =
-        '<ol>' +
-        '<li>按浏览器右上角 ⋮<span class="en">Tap the ⋮ menu (top right)</span></li>' +
-        '<li>选「加到主屏幕」或「安装应用」<span class="en">Tap “Add to Home screen” or “Install app”</span></li>' +
-        '</ol>';
+      var ol2 = el('ol');
+      ol2.appendChild(stepLi('and1'));
+      ol2.appendChild(stepLi('and2'));
+      body.appendChild(ol2);
     }
     det.appendChild(body);
     slot.appendChild(det);
@@ -1165,9 +1488,10 @@ window.addEventListener('appinstalled', function () { installPrompt = null; rend
 
 /* ---------------- 启动 ---------------- */
 buildSetup();
+buildLangRows();
 bindWork();
-renderInstall();
 ensureDay();
+applyLang();
 if (validProfile()) showWork(); else showSetup();
 
 setInterval(checkNewDay, 30000);
@@ -1178,7 +1502,6 @@ window.addEventListener('pageshow', function (e) { if (e.persisted) checkNewDay(
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
 }
-
 })();
 </script>
 </body>
